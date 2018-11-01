@@ -61,6 +61,8 @@ public class BasketActivity extends AppCompatActivity {
                 if (e == null){
 
                     Toast.makeText(BasketActivity.this, "Order is now COOKING", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), OrderUpdatesActivity.class);
+                    startActivity(intent);
 
                 }else {
 
@@ -89,12 +91,8 @@ public class BasketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
 
-        //Intent intent = getIntent();
-        //newList.clear();  to clear all items -- you gonna need it somewhere.
-
 
         ListView selectedItemsListView = findViewById(R.id.selectedItemsListView);
-
 
 
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,newList);
