@@ -15,6 +15,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 // Button to view Basket pressed from Menu Activity:
 // This is a test for the new branch
@@ -45,9 +46,11 @@ public class BasketActivity extends AppCompatActivity {
 
         Log.i("Place order", "SUCCESS");
 
+        final int orderNumber = new Random().nextInt(9000) + 1000; // [0,8999] + 1000 => [1000, 9999]
+
         ParseObject order = new ParseObject("Order");
         order.put("TableNumber", ParseUser.getCurrentUser().getUsername());
-        order.put("OrderID", 19); // where 10 is random no
+        order.put("OrderID", orderNumber);
         order.put("Status", "new");
         order.put("Item", newList);
 
