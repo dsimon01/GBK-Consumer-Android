@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GBK</string>
+    <string name="homepageimage">homepageImage</string>
 </resources>
