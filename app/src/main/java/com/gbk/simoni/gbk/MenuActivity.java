@@ -3,6 +3,7 @@ package com.gbk.simoni.gbk;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -90,6 +91,7 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setAdapter(new RecyclerAdapter(sampleItem));
     }
 
