@@ -33,6 +33,7 @@
             android:label="The Gourmet Menu..."/>
         <activity android:name=".BasketActivity" />
         <activity android:name=".OrderUpdatesActivity" />
+        <activity android:name=".ItemSelectionActivity" />
     </application>
 
 </manifest>

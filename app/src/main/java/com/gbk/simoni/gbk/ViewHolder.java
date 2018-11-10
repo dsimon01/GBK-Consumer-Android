@@ -2,9 +2,11 @@ package com.gbk.simoni.gbk;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -18,10 +20,5 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         image = itemView.findViewById(R.id.image_view_recycler);
         name = itemView.findViewById(R.id.name_textView);
         desc = itemView.findViewById(R.id.desc_textV);
-
     }
-
-
-
-
 }

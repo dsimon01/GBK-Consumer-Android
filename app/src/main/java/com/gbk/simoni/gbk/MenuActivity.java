@@ -48,7 +48,7 @@ public class MenuActivity extends AppCompatActivity {
 
     };
 
-    int[] image = {
+    public int[] image = {
 
             R.drawable.gbkhome,
             R.drawable.login,
@@ -62,8 +62,6 @@ public class MenuActivity extends AppCompatActivity {
             R.drawable.login,
             R.drawable.ic_launcher_background,
             R.drawable.ic_launcher_foreground,
-
-
     };
 
     @Override
@@ -82,7 +80,7 @@ public class MenuActivity extends AppCompatActivity {
             Items item = new Items();
             item.itemName = itemName[i];
             item.itemDescription = itemDesc[i];
-            item.userImage = image[i];
+            item.itemImage = image[i];
 
             sampleItem.add(item);
         }
@@ -93,6 +91,7 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setAdapter(new RecyclerAdapter(sampleItem));
+
     }
 
 }
