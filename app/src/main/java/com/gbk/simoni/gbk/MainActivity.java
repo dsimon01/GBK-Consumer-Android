@@ -16,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
 
-        /*
+
 
         if (ParseUser.getCurrentUser() != null){
             Intent alreadyLoggedIn = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(alreadyLoggedIn);
         }
 
-        */
+
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
