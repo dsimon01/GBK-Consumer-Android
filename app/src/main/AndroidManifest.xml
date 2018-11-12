@@ -38,7 +38,7 @@
         <activity
             android:name=".MenuActivity"
             android:theme="@style/AppTheme.TransparentTheme"
-            android:label="The Gourmet Menu..."
+            android:label="The Gourmet Menu"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"/>
         <activity
@@ -53,9 +53,6 @@
             android:name=".ItemSelectionActivity"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"
-
-
-
             />
     </application>
 

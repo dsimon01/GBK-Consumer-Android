@@ -7,11 +7,11 @@ import android.view.View;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public void onViewMenuClick(View view){
 
+//When the button to view menu is pressed by the user, they will be redirected to the Menu Activity.
+    public void onViewMenuClick(View view){
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
         startActivity(intent);
-
     }
 
     @Override

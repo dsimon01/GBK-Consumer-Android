@@ -20,7 +20,7 @@ public class ParseServerConfig extends Application {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
-        // Config with Parse-Bitnami
+        // Config keys with Parse-Bitnami.
         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                 .applicationId("0f8520e454f6ad2e9d7b288af8fb6ab2e2e15f65")
                 .clientKey("ebe48418c0faaea3bee4ede298d571d663ddcde0")
@@ -28,7 +28,8 @@ public class ParseServerConfig extends Application {
                 .build()
         );
 
-        /*
+        /* Dummy code to create example objects programmatically:
+
         ParseObject object = new ParseObject("ExampleObject");
         object.put("myNumber", "123");
         object.put("myString", "gourmet burger user");

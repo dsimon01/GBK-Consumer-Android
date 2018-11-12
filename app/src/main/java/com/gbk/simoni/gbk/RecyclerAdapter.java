@@ -32,6 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         final Items sampleItem = items.get(i);
         viewHolder.name.setText(sampleItem.itemName);
+        viewHolder.price.setText(Double.toString(sampleItem.price));
         viewHolder.desc.setText(sampleItem.itemDescription);
         viewHolder.image.setImageResource(sampleItem.itemImage);
 
@@ -46,6 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
                 Log.i("ItemClicked", "Item: " + i);
                 Intent intent = new Intent(v.getContext(), ItemSelectionActivity.class);
                 intent.putExtra("item_name", sampleItem.itemName);
+                intent.putExtra("item_price", sampleItem.price);
                 intent.putExtra("item_description", sampleItem.itemDescription);
                 intent.putExtra("item_image", sampleItem.itemImage);
                 v.getContext().startActivity(intent);
