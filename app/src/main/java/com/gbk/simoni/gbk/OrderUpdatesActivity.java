@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class OrderUpdatesActivity extends AppCompatActivity {
 
+// Activity for order updates:
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

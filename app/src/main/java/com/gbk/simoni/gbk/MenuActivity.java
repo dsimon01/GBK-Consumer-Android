@@ -2,7 +2,9 @@ package com.gbk.simoni.gbk;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     static List<Items> sampleItem2 = new ArrayList<>();
     ArrayList<String> itemNameBasket = new ArrayList<>();
@@ -30,35 +33,44 @@ public class MenuActivity extends AppCompatActivity {
 
     String[] itemName = {
 
-            "Gourmet Spicy",
-            "Gourmet Blue",
-            "Gourmet Very Spicy",
-            "Gourmet Green",
-            "Gourmet Spicy",
-            "Gourmet Blue",
-            "Gourmet Very Spicy",
-            "Gourmet Green",
-            "Gourmet Spicy",
-            "Gourmet Blue",
-            "Gourmet Very Spicy",
-            "Gourmet Green",
+            "GBK Cheese & Bacon",
+            "Classic Beef",
+            "The Mighty",
+            "The Taxidriver",
+            "Blue Cheese",
+            "Kiwiburger",
+            "GBK Applewood Cheese",
+            "Avo Bacon",
+            "Hot Diggity",
+            "GBK American Cheese",
+    };
+
+    Double[] price = {
+
+            10.95,
+            8.15,
+            13.95,
+            11.95,
+            9.45,
+            10.85,
+            10.55,
+            10.95,
+            10.75,
+            9.85,
     };
 
     String[] itemDesc = {
 
-            "Description1 kshfkdhslsdlgkj sdgklsd gjl ksgjslk dgjs dljg sd",
-            "Description2 kshfkdh sl sdlgk jsdgklsd gjlksgjslkdg sdljgsd",
-            "Description3 kshfkdhsl sdl gkjsd gkl sdgjlk sgjslkdg j dljgsd",
-            "Descriptio4 kshf kdhsls dlgkjsd gk lsdg jlksgjslkd gjsdl jgsd",
-            "Description1 kshfkdhslsdlgkj sdgklsd gjl ksgjslk dgjs dljg sd",
-            "Description2 kshfkdh sl sdlgk jsdgklsd gjlksgjslkdg sdljgsd",
-            "Description3 kshfkdhsl sdl gkjsd gkl sdgjlk sgjslkdg j dljgsd",
-            "Descriptio4 kshf kdhsls dlgkjsd gk lsdg jlksgjslkd gjsdl jgsd",
-            "Description1 kshfkdhslsdlgkj sdgklsd gjl ksgjslk dgjs dljg sd",
-            "Description2 kshfkdh sl sdlgk jsdgklsd gjlksgjslkdg sdljgsd",
-            "Description3 kshfkdhsl sdl gkjsd gkl sdgjlk sgjslkdg j dljgsd",
-            "Descriptio4 kshf kdhsls dlgkjsd gk lsdg jlksgjslkd gjsdl jgsd",
-
+            "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
+            "House mayo, mature Cheddar, relish, salad, chilli fried egg.",
+            "Two 6oz patties, mature Cheddar, crispy bacon, garlic mayo, relish, dill pickle.",
+            "American cheese, homemade onion ring, Cajun relish, chipotle mayo, dill pickle, salad.",
+            "Onion jam, Cajun relish, house mayo, dill pickle, salad.",
+            "6oz beef, mature Cheddar, beetroot, fried egg, grilled pineapple, house mayo, relish, salad",
+            "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
+            "Smashed avocado, crispy bacon, house mayo, relish.",
+            "American and mature Cheddar cheese, chilli fried egg, basil mayo, habanero jam.",
+            "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
     };
 
     public int[] image = {
@@ -87,6 +99,10 @@ public class MenuActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setExpandedTitleColor(000);
+
+
         recyclerView = findViewById(R.id.recycler_view_id);
         List<Items> sampleItem = new ArrayList<>();
 
@@ -94,6 +110,7 @@ public class MenuActivity extends AppCompatActivity {
 
             Items item = new Items();
             item.itemName = itemName[i];
+            item.price = price[i];
             item.itemDescription = itemDesc[i];
             item.itemImage = image[i];
 
