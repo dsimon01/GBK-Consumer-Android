@@ -20,6 +20,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO - > Add 2 or more items to the basket and reflect that to the sampleItem2 list
+// TODO - > Calculate the total of an order about to go in the basket
+// TODO - > Calculate the total count of items to add in the basket (print them to confirm correct behaviour)
+// TODO - > Improve designs in item selection
+// TODO - > Improve Bottom Nav bar - recycler view UI bug when bottom nav appears
+// TODO - > Simply list the order items added to the basked activity
+// TODO - > Test the Basket activity behaviour
+// TODO - > Review code and add comments
+
 public class MenuActivity extends AppCompatActivity {
 
     Toolbar toolbar;
