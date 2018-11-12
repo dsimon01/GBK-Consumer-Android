@@ -32,7 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         final Items sampleItem = items.get(i);
         viewHolder.name.setText(sampleItem.itemName);
-        viewHolder.price.setText(Double.toString(sampleItem.price));
+        viewHolder.price.setText(sampleItem.price);
         viewHolder.desc.setText(sampleItem.itemDescription);
         viewHolder.image.setImageResource(sampleItem.itemImage);
 

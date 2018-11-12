@@ -45,18 +45,18 @@ public class MenuActivity extends AppCompatActivity {
             "GBK American Cheese",
     };
 
-    Double[] price = {
+    String[] price = {
 
-            10.95,
-            8.15,
-            13.95,
-            11.95,
-            9.45,
-            10.85,
-            10.55,
-            10.95,
-            10.75,
-            9.85,
+            "£10.95",
+            "£8.15",
+            "£13.95",
+            "£11.95",
+            "£9.45",
+            "£10.85",
+            "£10.55",
+            "£10.95",
+            "£10.75",
+            "£9.85",
     };
 
     String[] itemDesc = {
@@ -77,16 +77,15 @@ public class MenuActivity extends AppCompatActivity {
 
             R.drawable.gbkhome,
             R.drawable.login,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_foreground,
-            R.drawable.gbkhome,
-            R.drawable.login,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_foreground,
-            R.drawable.gbkhome,
-            R.drawable.login,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_foreground,
+            R.drawable.mighty,
+            R.drawable.taxidriver,
+            R.drawable.blue_cheese,
+            R.drawable.kiwi,
+            R.drawable.applewood,
+            R.drawable.avobacon,
+            R.drawable.diggity,
+            R.drawable.american_cheese,
+
     };
 
     @Override
