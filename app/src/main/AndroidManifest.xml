@@ -19,21 +19,44 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"/>
         <activity
             android:name=".MenuActivity"
             android:theme="@style/AppTheme.TransparentTheme"
-            android:label="The Gourmet Menu..."/>
-        <activity android:name=".BasketActivity" />
-        <activity android:name=".OrderUpdatesActivity" />
-        <activity android:name=".ItemSelectionActivity" />
+            android:label="The Gourmet Menu..."
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name=".BasketActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".OrderUpdatesActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".ItemSelectionActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+
+
+
+            />
     </application>
 
 </manifest>
