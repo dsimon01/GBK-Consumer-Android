@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#958</color>
     <color name="colorAccent">#008577</color>
     <color name="colorFab">#FFF</color>
+    <color name="snackBarBackground">#f0f0f0</color>
 </resources>

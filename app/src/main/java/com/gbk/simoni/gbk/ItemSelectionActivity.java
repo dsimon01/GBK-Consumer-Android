@@ -1,6 +1,8 @@
 package com.gbk.simoni.gbk;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemSelectionActivity extends AppCompatActivity {
 
     int defaultValue = 1;
@@ -16,6 +21,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_selection_activity);
+
 
         getIntentFromRecyclerAdapter();
 
@@ -65,22 +71,6 @@ public class ItemSelectionActivity extends AppCompatActivity {
         }
     }
 
-            /*
-
-    What needs to happen when the button is pressed:
-
-    1: The item Name, description, price, count needs to be added to a "Basket List"
-    2: Intent back to the menu activity
-    3: Now the activity should show a Snackbar on the bottom with X items, total amount, and "go to basket" button
-
-     */
-
-    public void addToBasket(View view){
-
-        System.out.println("added " + defaultValue + " items to the basket");
-
-    }
-
     private void setActivityContent(String itemName, String itemDescription, int image){
 
         TextView name = findViewById(R.id.itemNameTextView);
@@ -92,4 +82,17 @@ public class ItemSelectionActivity extends AppCompatActivity {
         images.setImageResource(image);
 
     }
+
+    public void addToBasket(View view){
+
+        String itemName = getIntent().getStringExtra("item_name");
+        String itemDescription = getIntent().getStringExtra("item_description");
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("item_name", itemName);
+        intent.putExtra("item_description", itemDescription);
+        startActivity(intent);
+
+    }
+
+
 }
