@@ -158,6 +158,7 @@ public class MenuActivity extends AppCompatActivity {
 /*
     Snackbar basketItemsSnack;
 
+
             View view = findViewById(R.id.menu_activity);
             basketItemsSnack = Snackbar.make(view, "ITEMS IN BASKET " + sampleItem2.size(), Snackbar.LENGTH_INDEFINITE);
             basketItemsSnack.setAction("View Basket", new View.OnClickListener() {
