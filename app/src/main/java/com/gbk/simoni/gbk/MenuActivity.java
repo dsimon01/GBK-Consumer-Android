@@ -28,6 +28,7 @@ import java.util.List;
 // TODO - > Simply list the order items added to the basked activity
 // TODO - > Test the Basket activity behaviour
 // TODO - > Review code and add comments
+// TODO - > TODO for the next day
 
 public class MenuActivity extends AppCompatActivity {
 
