@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -32,7 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         final Items sampleItem = items.get(i);
         viewHolder.name.setText(sampleItem.itemName);
-        viewHolder.price.setText(sampleItem.price);
+        viewHolder.price.setText(String.format(Locale.ENGLISH, "£%.2f", sampleItem.price));
         viewHolder.desc.setText(sampleItem.itemDescription);
         viewHolder.image.setImageResource(sampleItem.itemImage);
 

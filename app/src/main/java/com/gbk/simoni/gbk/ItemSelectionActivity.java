@@ -58,13 +58,14 @@ public class ItemSelectionActivity extends AppCompatActivity {
            // Log.i("INTENTS FROM RA", "RECEIVED"); DEBUG
             String itemName = getIntent().getStringExtra("item_name");
             String itemDescription = getIntent().getStringExtra("item_description");
-            String itemPrice = getIntent().getStringExtra("item_price");
+            double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
             int itemImage = getIntent().getIntExtra("item_image", 2131165283);
+
             setActivityContent(itemName,itemDescription,itemPrice,itemImage);
         }
     }
 
-    private void setActivityContent(String itemName, String itemDescription,String itemPrice, int image){
+    private void setActivityContent(String itemName, String itemDescription,double itemPrice, int image){
 
         TextView name = findViewById(R.id.itemNameTextView);
         TextView desc = findViewById(R.id.itemDescriptionTextView);
@@ -72,14 +73,14 @@ public class ItemSelectionActivity extends AppCompatActivity {
         ImageView images = findViewById(R.id.selectedItemImageView);
         name.setText(itemName);
         desc.setText(itemDescription);
-        price.setText(itemPrice);
+        price.setText(Double.toString(itemPrice));
         images.setImageResource(image);
     }
 
     public void addToBasket(View view){
         String itemName = getIntent().getStringExtra("item_name");
         String itemDescription = getIntent().getStringExtra("item_description");
-        String itemPrice = getIntent().getStringExtra("item_price");
+        double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
         int counterVal = getIntent().getIntExtra("counter_value", counterValue);
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("item_name", itemName);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 // TODO - > Improve designs in item selection
@@ -29,6 +30,8 @@ public class MenuActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    static double totalPrice = 0.00;
+
     Items item2 = new Items();
 
     static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
@@ -47,18 +50,18 @@ public class MenuActivity extends AppCompatActivity {
             "GBK American Cheese",
     };
 
-    String[] price = {
+    Double[] price = {
 
-            "£10.95",
-            "£8.15",
-            "£13.95",
-            "£11.95",
-            "£9.45",
-            "£10.85",
-            "£10.55",
-            "£10.95",
-            "£10.75",
-            "£9.85",
+            10.95,
+            10.65,
+            11.95,
+            9.95,
+            11.20,
+            10.45,
+            9.60,
+            9.85,
+            11.00,
+            13.00,
     };
 
     String[] itemDesc = {
@@ -130,7 +133,7 @@ public class MenuActivity extends AppCompatActivity {
 
             String itemNameX = getIntent().getStringExtra("item_name");
             String itemDescription = getIntent().getStringExtra("item_description");
-            String itemPrice = getIntent().getStringExtra("item_price");
+            double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
             int counterValue = getIntent().getIntExtra("counter_value", 1);
             System.out.println("RECEIVED FROM ITEM SELECTION " + itemNameX + " " + itemDescription + " " + counterValue + " Times");
 
@@ -142,7 +145,7 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    public void addItemsToStaticList(int counter, String name, String description, String price){
+    public void addItemsToStaticList(int counter, String name, String description, double price){
 
         for (int i = 0; i < counter; i++) {
 
@@ -150,6 +153,7 @@ public class MenuActivity extends AppCompatActivity {
             item2.itemName = name;
             item2.itemDescription = description;
             item2.price = price;
+            totalPrice += item2.price;
 
             selectedItemsList.add(item2);
 
@@ -179,8 +183,8 @@ public class MenuActivity extends AppCompatActivity {
     public void showPrice(){
 
         TextView price = findViewById(R.id.priceBottomNavBar);
-        price.setText(item2.price);
-        System.out.println(item2.price + " HEREEEE");
+        price.setText(String.format(Locale.ENGLISH, "£%.2f", totalPrice));
+        System.out.println(totalPrice + " THE CURRENT TOTAL PRICE");
 
     }
 
