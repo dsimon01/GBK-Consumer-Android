@@ -2,27 +2,21 @@ package com.gbk.simoni.gbk;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO - > Add 2 or more items to the basket and reflect that to the sampleItem2 list
-// TODO - > Calculate the total of an order about to go in the basket
-// TODO - > Calculate the total count of items to add in the basket (print them to confirm correct behaviour)
+
 // TODO - > Improve designs in item selection
 // TODO - > Improve Bottom Nav bar - recycler view UI bug when bottom nav appears
 // TODO - > Simply list the order items added to the basked activity
@@ -35,11 +29,9 @@ public class MenuActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    Items item2 = new Items();
 
-    static List<Items> sampleItem2 = new ArrayList<>();
-    ArrayList<String> itemNameBasket = new ArrayList<>();
-    ArrayList<String> itemDescBasket = new ArrayList<>();
-
+    static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
 
     String[] itemName = {
 
@@ -107,97 +99,94 @@ public class MenuActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(000);
-
-
         recyclerView = findViewById(R.id.recycler_view_id);
-        List<Items> sampleItem = new ArrayList<>();
 
+        List<Items> menuItem = new ArrayList<>();
         for (int i = 0; i < itemName.length; i++) {
-
             Items item = new Items();
             item.itemName = itemName[i];
             item.price = price[i];
             item.itemDescription = itemDesc[i];
             item.itemImage = image[i];
-
-            sampleItem.add(item);
+            menuItem.add(item);
         }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        recyclerView.setAdapter(new RecyclerAdapter(sampleItem));
+        recyclerView.setAdapter(new RecyclerAdapter(menuItem));
 
         }
 
     private void getIntentFromBasket(){
 
-        if (getIntent().hasExtra("item_name") && getIntent().hasExtra("item_description")){
-            Log.i("INTENTS FROM BASKET", "RECEIVED");
+        if (getIntent().hasExtra("item_name")
+                && getIntent().hasExtra("item_description")
+                && getIntent().hasExtra("item_price")
+                && getIntent().hasExtra("counter_value")){
+
             String itemNameX = getIntent().getStringExtra("item_name");
             String itemDescription = getIntent().getStringExtra("item_description");
-            itemNameBasket.add(itemNameX);
-            itemDescBasket.add(itemDescription);
-            Toast.makeText(this, "GOT " + itemNameX + " " + itemDescription, Toast.LENGTH_LONG).show();
+            String itemPrice = getIntent().getStringExtra("item_price");
+            int counterValue = getIntent().getIntExtra("counter_value", 1);
+            System.out.println("RECEIVED FROM ITEM SELECTION " + itemNameX + " " + itemDescription + " " + counterValue + " Times");
 
+            addItemsToStaticList(counterValue, itemNameX, itemDescription, itemPrice);
+            showBottomNavBar();
 
-            for (int i = 0; i < itemNameBasket.size(); i++) {
-
-                Items item2 = new Items();
-                item2.itemName = itemNameBasket.get(i);
-                item2.itemDescription = itemDescBasket.get(i);
-                //item2.itemImage = image[i];
-
-                sampleItem2.add(item2);
-            }
-
-            if (sampleItem2.size() > 0){
-                BottomNavigationView bar = findViewById(R.id.bottomNav_id);
-                bar.setVisibility(View.VISIBLE);
-                bar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Intent intent = new Intent(v.getContext(),BasketActivity.class);
-                        v.getContext().startActivity(intent);
-
-
-                    }
-                });
-            }
-            System.out.println(sampleItem2.size() + " The size of sample2 " + sampleItem2);
-            System.out.println(itemNameBasket.size() + " The size of itemNameBasket " + itemNameBasket);
-            System.out.println(itemDescBasket.size() + " The size of itemDescBasket " + itemDescBasket);
-
+            System.out.println(selectedItemsList.size() + " The size of selected items list " + selectedItemsList);
         }
 
     }
 
-}
+    public void addItemsToStaticList(int counter, String name, String description, String price){
+
+        for (int i = 0; i < counter; i++) {
 
 
-/*
-    Snackbar basketItemsSnack;
+            item2.itemName = name;
+            item2.itemDescription = description;
+            item2.price = price;
 
+            selectedItemsList.add(item2);
 
-            View view = findViewById(R.id.menu_activity);
-            basketItemsSnack = Snackbar.make(view, "ITEMS IN BASKET " + sampleItem2.size(), Snackbar.LENGTH_INDEFINITE);
-            basketItemsSnack.setAction("View Basket", new View.OnClickListener() {
+        }
+    }
+
+    public void showBottomNavBar(){
+
+        if (selectedItemsList.size() > 0) {
+            BottomNavigationView bar = findViewById(R.id.bottomNav_id);
+            bar.setVisibility(View.VISIBLE);
+            showItemCount();
+            showPrice();
+
+            bar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    System.out.println("Clicked to view basket");
-
+                    Intent intent = new Intent(v.getContext(),BasketActivity.class);
+                    v.getContext().startActivity(intent);
                 }
             });
-            View v = basketItemsSnack.getView();
-            v.setBackgroundColor(getResources().getColor(R.color.snackBarBackground));
-            TextView text = v.findViewById(android.support.design.R.id.snackbar_text);
-            text.setTextColor(getResources().getColor(R.color.colorAccent));
-            basketItemsSnack.show();
- */
+        }
+    }
+
+    public void showPrice(){
+
+
+        TextView price = findViewById(R.id.priceBottomNavBar);
+        price.setText(item2.price);
+        System.out.println(item2.price + " HEREEEE");
+
+    }
+
+    public void showItemCount(){
+
+        TextView itemCount = findViewById(R.id.itemCountBottomNavBar);
+        itemCount.setText(Integer.toString(selectedItemsList.size()));
+
+    }
+}
