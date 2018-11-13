@@ -19,10 +19,10 @@ import java.util.Locale;
 
 
 // TODO - > Improve designs in item selection
-// TODO - > Improve Bottom Nav bar - recycler view UI bug when bottom nav appears
 // TODO - > Simply list the order items added to the basked activity
 // TODO - > Test the Basket activity behaviour
 // TODO - > Review code and add comments
+
 // TODO - > TODO for the next day
 
 public class MenuActivity extends AppCompatActivity {
@@ -191,7 +191,12 @@ public class MenuActivity extends AppCompatActivity {
     public void showItemCount(){
 
         TextView itemCount = findViewById(R.id.itemCountBottomNavBar);
-        itemCount.setText(Integer.toString(selectedItemsList.size()));
+        if (selectedItemsList.size() > 1){
+            itemCount.setText(String.format("%s Items", Integer.toString(selectedItemsList.size())));
+        }
 
+        if (selectedItemsList.size() <= 1){
+            itemCount.setText(String.format("%s Item", Integer.toString(selectedItemsList.size())));
+        }
     }
 }
