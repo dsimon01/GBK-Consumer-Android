@@ -99,7 +99,6 @@
             android:layout_height="wrap_content"
             android:text="VIEW BASKET"
             android:id="@+id/viewBasketNavBar"
-            android:textSize="18sp"
             android:textColor="@color/colorFab"
             android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"

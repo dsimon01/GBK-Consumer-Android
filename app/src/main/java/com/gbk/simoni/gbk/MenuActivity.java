@@ -160,6 +160,8 @@ public class MenuActivity extends AppCompatActivity {
 
         if (selectedItemsList.size() > 0) {
             BottomNavigationView bar = findViewById(R.id.bottomNav_id);
+            RecyclerView view = findViewById(R.id.recycler_view_id);
+            view.getLayoutParams().height = 1150;
             bar.setVisibility(View.VISIBLE);
             showItemCount();
             showPrice();
@@ -175,7 +177,6 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void showPrice(){
-
 
         TextView price = findViewById(R.id.priceBottomNavBar);
         price.setText(item2.price);
