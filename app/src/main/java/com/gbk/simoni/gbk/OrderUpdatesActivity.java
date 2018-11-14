@@ -9,18 +9,12 @@ import java.util.ArrayList;
 
 public class OrderUpdatesActivity extends AppCompatActivity {
 
-    ArrayList<String> orderItems = MenuActivity.selectedItems;
+// Activity for order updates:
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_updates);
-
-
-        ListView orderItemsList = findViewById(R.id.orderItemsPlacedListView);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,orderItems);
-        orderItemsList.setAdapter(adapter);
-
 
 
     }

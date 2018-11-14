@@ -1,93 +1,208 @@
 package com.gbk.simoni.gbk;
 
+
 import android.content.Intent;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+
+// TODO - > Improve designs in item selection
+// TODO - > Simply list the order items added to the basked activity
+// TODO - > Test the Basket activity behaviour
+// TODO - > Review code and add comments
+// TODO - > TODO for the next day
 
 public class MenuActivity extends AppCompatActivity {
 
-    static final ArrayList<String> selectedItems = new ArrayList<>();
+    Toolbar toolbar;
+    RecyclerView recyclerView;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    static double totalPrice = 0.00;
+    Items item2 = new Items();
 
-    public void onViewBasketClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
-        //intent.putExtra("items Selected", selectedItems);
-        startActivity(intent);
-    }
 
+    static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
+
+    String[] itemName = {
+
+            "GBK Cheese & Bacon",
+            "Classic Beef",
+            "The Mighty",
+            "The Taxidriver",
+            "Blue Cheese",
+            "Kiwiburger",
+            "GBK Applewood Cheese",
+            "Avo Bacon",
+            "Hot Diggity",
+            "GBK American Cheese",
+    };
+
+    Double[] price = {
+
+            10.95,
+            10.65,
+            11.95,
+            9.95,
+            11.20,
+            10.45,
+            9.60,
+            9.85,
+            11.00,
+            13.00,
+    };
+
+    String[] itemDesc = {
+
+            "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
+            "House mayo, mature Cheddar, relish, salad, chilli fried egg.",
+            "Two 6oz patties, mature Cheddar, crispy bacon, garlic mayo, relish, dill pickle.",
+            "American cheese, homemade onion ring, Cajun relish, chipotle mayo, dill pickle, salad.",
+            "Onion jam, Cajun relish, house mayo, dill pickle, salad.",
+            "6oz beef, mature Cheddar, beetroot, fried egg, grilled pineapple, house mayo, relish, salad",
+            "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
+            "Smashed avocado, crispy bacon, house mayo, relish.",
+            "American and mature Cheddar cheese, chilli fried egg, basil mayo, habanero jam.",
+            "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
+    };
+
+    public int[] image = {
+
+            R.drawable.gbkhome,
+            R.drawable.login,
+            R.drawable.mighty,
+            R.drawable.taxidriver,
+            R.drawable.blue_cheese,
+            R.drawable.kiwi,
+            R.drawable.applewood,
+            R.drawable.avobacon,
+            R.drawable.diggity,
+            R.drawable.american_cheese,
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        final ListView menuListView = findViewById(R.id.menuListView);
-        final ArrayList<String> items = new ArrayList<>();
-        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
 
+        getIntentFromItemSelectionActivity();
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setExpandedTitleColor(000);
+        recyclerView = findViewById(R.id.recycler_view_id);
 
-        // new code logs items pressed on the menu screen : TODO - add items selected in basket - Make basket visible - {clean basket after 5 minutes} (Animate the button visibility)
+        List<Items> menuItem = new ArrayList<>();
+        for (int i = 0; i < itemName.length; i++) {
+            Items item = new Items();
+            item.itemName = itemName[i];
+            item.price = price[i];
+            item.itemDescription = itemDesc[i];
+            item.itemImage = image[i];
+            menuItem.add(item);
+        }
 
-
-
-        menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                Button basket = findViewById(R.id.viewBasketButton);
-                basket.setVisibility(view.VISIBLE);
-
-                selectedItems.add(items.get(position));
-                Log.i("Item Tapped: ", items.get(position));
-
-            }
-        });
-
-
-        // new code ^^^
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("MenuItems");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-
-                if (e == null){
-                    if (objects.size() > 0){
-
-                        for (ParseObject object : objects){
-
-                            items.add(object.getString("Category"));
-                            items.add(object.getString("ItemName"));
-                            items.add(object.getString("ItemDescription"));
-                            items.add(object.getString("Price"));
-
-
-                   //         Log.i("findInBHRND: ", object.getString("Category"));
-
-                        }
-
-                        menuListView.setAdapter(arrayAdapter);
-                    }
-
-                }else {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        recyclerView.setAdapter(new RecyclerAdapter(menuItem));
 
         }
 
+    private void getIntentFromItemSelectionActivity(){
+
+        if (getIntent().hasExtra("item_name")
+                && getIntent().hasExtra("item_description")
+                && getIntent().hasExtra("item_image")
+                && getIntent().hasExtra("item_price")){
+
+            String itemNameX = getIntent().getStringExtra("item_name");
+            String itemDescription = getIntent().getStringExtra("item_description");
+            double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
+            int itemImage = getIntent().getIntExtra("item_image", 2131165283);
+            int counterValue = getIntent().getIntExtra("counter_value", 1);
+            System.out.println("RECEIVED FROM ITEM SELECTION " + itemNameX + " " + itemDescription + " " + counterValue + " Times");
+
+            addItemsToStaticList(counterValue, itemNameX, itemDescription, itemPrice, itemImage);
+            showBottomNavBar();
+
+            System.out.println(selectedItemsList.size() + " The size of selected items list " + selectedItemsList);
+        }
+
     }
+
+    public void addItemsToStaticList(int counter, String name, String description, double price, int image){
+
+        for (int i = 0; i < counter; i++) {
+
+            item2.itemName = name;
+            item2.itemDescription = description;
+            item2.price = price;
+            item2.itemImage = image;
+            totalPrice += item2.price;
+            selectedItemsList.add(item2);
+        }
+    }
+
+    // passing data to basket activity
+    public void showBottomNavBar(){
+
+        if (selectedItemsList.size() > 0) {
+            BottomNavigationView bar = findViewById(R.id.bottomNav_id);
+            RecyclerView view = findViewById(R.id.recycler_view_id);
+            view.getLayoutParams().height = 1150;
+            bar.setVisibility(View.VISIBLE);
+            showItemCount();
+            showPrice();
+
+            bar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(),BasketActivity.class);
+                    intent.putExtra("item_name", item2.itemName);
+                    intent.putExtra("item_price", item2.price);
+                    intent.putExtra("item_description", item2.itemDescription);
+                    intent.putExtra("item_image", item2.itemImage);
+                    v.getContext().startActivity(intent);
+                    System.out.println("DATA SENT TO BASKET ACTIVITY FROM MENU ACTIVITY:");
+                }
+            });
+        }
+    }
+
+    public void showPrice(){
+
+        TextView price = findViewById(R.id.priceBottomNavBar);
+        price.setText(String.format(Locale.ENGLISH, "£%.2f", totalPrice));
+        System.out.println(totalPrice + " THE CURRENT TOTAL PRICE");
+
+    }
+
+    public void showItemCount(){
+
+        TextView itemCount = findViewById(R.id.itemCountBottomNavBar);
+        if (selectedItemsList.size() > 1){
+            itemCount.setText(String.format("%s Items", Integer.toString(selectedItemsList.size())));
+        }
+
+        if (selectedItemsList.size() <= 1){
+            itemCount.setText(String.format("%s Item", Integer.toString(selectedItemsList.size())));
+        }
+    }
+}
