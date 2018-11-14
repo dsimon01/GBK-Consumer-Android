@@ -39,8 +39,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
          //System.out.println(sampleItem);   = > I/System.out: com.gbk.simoni.gbk.Items@ee5429c
         // System.out.println(sampleItem.itemName);  = > Gourmet Very Spicy
-        // System.out.println(sampleItem.itemDescription); Description1
-        // System.out.println(sampleItem.itemImage); => 2131165283
+        // System.out.println(sampleItem.itemDescriptionList); Description1
+        // System.out.println(sampleItem.itemImageList); => 2131165283
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
