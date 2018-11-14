@@ -24,7 +24,7 @@ import java.util.Random;
 public class BasketActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    List<Items> orderItems;
+    static List<Items> orderItems;
     ArrayList<String> itemNamesList , itemDescriptionList;
     ArrayList<Double> itemPriceList;
     ArrayList<Integer> itemImageList;
@@ -37,7 +37,7 @@ public class BasketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basket);
+        setContentView(R.layout.basket_activity);   // ===========================  REMOVE THE OTHER BASKET ACTIVITY BUT TAKE BUTTON CODE
 
         orderItems = new ArrayList<>();
         itemNamesList = new ArrayList<>();
@@ -45,9 +45,8 @@ public class BasketActivity extends AppCompatActivity {
         itemImageList = new ArrayList<>();
         itemDescriptionList = new ArrayList<>();
         basketRecyclerView = findViewById(R.id.recyclerViewBasket);
-        json = gson.toJson(MenuActivity.selectedItemsList);
 
-        System.out.println("JSON SER " + json + " " + MenuActivity.selectedItemsList.size());
+        json = gson.toJson(MenuActivity.selectedItemsList);
 
         JSONArray jsonarray = null;
 
@@ -70,10 +69,10 @@ public class BasketActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            double price = 11.95;
-            String name = "Wagz";
-            String description = "Funey";
-            int image;
+            double price = 0;
+            String name = "";
+            String description = "";
+            int image = 0;
 
             try {
 
@@ -86,8 +85,6 @@ public class BasketActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-
             item.itemName = name;
             itemNamesList.add(item.itemName);
             item.price = price;
@@ -97,29 +94,16 @@ public class BasketActivity extends AppCompatActivity {
             item.itemImage = image;
             itemImageList.add(item.itemImage);
             orderItems.add(item);
-
         }
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        //orderItems
-
-
-        //ListView selectedItemsListView = findViewById(R.id.selectedItemsListView);
-        //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, itemNamesList); // The list we get from menu activity goes here.);
-        //selectedItemsListView.setAdapter(adapter);
-
-        System.out.println(orderItems + " BEFORE CRASH ");
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
-        basketRecyclerView.setAdapter(new BasketAdapter(orderItems);
-
+        basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
     }
-
 
     public void onPlaceOrderClick(View view){
         System.out.println("PLACED ORDER");
