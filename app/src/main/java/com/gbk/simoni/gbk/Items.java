@@ -7,6 +7,4 @@ public class Items {
     Double price;
     int itemImage;
 
-
-
 }
