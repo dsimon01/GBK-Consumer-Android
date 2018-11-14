@@ -72,11 +72,11 @@ public class ItemSelectionActivity extends AppCompatActivity {
 
         TextView name = findViewById(R.id.itemNameTextView);
         TextView desc = findViewById(R.id.itemDescriptionTextView);
-        TextView price = findViewById(R.id.itemPriceTextView);
+      //  TextView price = findViewById(R.id.itemPriceTextView);
         ImageView images = findViewById(R.id.selectedItemImageView);
         name.setText(itemName);
         desc.setText(itemDescription);
-        price.setText(Double.toString(itemPrice));
+      //  price.setText(Double.toString(itemPrice));
         images.setImageResource(image);
     }
 
