@@ -54,8 +54,11 @@ public class ItemSelectionActivity extends AppCompatActivity {
     private void getIntentFromRecyclerAdapter(){
 
         //check if there are any intents to avoid crashing.
-        if (getIntent().hasExtra("item_name") && getIntent().hasExtra("item_description") && getIntent().hasExtra("item_image") && getIntent().hasExtra("item_price")){
-           // Log.i("INTENTS FROM RA", "RECEIVED"); DEBUG
+        if (getIntent().hasExtra("item_name")
+                && getIntent().hasExtra("item_description")
+                && getIntent().hasExtra("item_image")
+                && getIntent().hasExtra("item_price")){
+
             String itemName = getIntent().getStringExtra("item_name");
             String itemDescription = getIntent().getStringExtra("item_description");
             double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
@@ -77,17 +80,20 @@ public class ItemSelectionActivity extends AppCompatActivity {
         images.setImageResource(image);
     }
 
+    // REMOVE PUT EXTRA FROM HERE
     public void addToBasket(View view){
         String itemName = getIntent().getStringExtra("item_name");
         String itemDescription = getIntent().getStringExtra("item_description");
+        int itemImage = getIntent().getIntExtra("item_image", 0);
         double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
         int counterVal = getIntent().getIntExtra("counter_value", counterValue);
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("item_name", itemName);
         intent.putExtra("item_description", itemDescription);
+        intent.putExtra("item_image", itemImage);
         intent.putExtra("item_price", itemPrice);
         intent.putExtra("counter_value", counterVal);
-        System.out.println("YOU ARE SENDING " + counterValue + " ITEMS TO THE MENU ACTIVITY");
+        System.out.println("YOU ARE SENDING " + counterValue + " ITEMS TO THE BASKET ACTIVITY");
         startActivity(intent);
 
 

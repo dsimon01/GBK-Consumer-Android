@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +24,6 @@ import java.util.Locale;
 // TODO - > Simply list the order items added to the basked activity
 // TODO - > Test the Basket activity behaviour
 // TODO - > Review code and add comments
-
 // TODO - > TODO for the next day
 
 public class MenuActivity extends AppCompatActivity {
@@ -31,8 +32,8 @@ public class MenuActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     CollapsingToolbarLayout collapsingToolbarLayout;
     static double totalPrice = 0.00;
-
     Items item2 = new Items();
+
 
     static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
 
@@ -98,7 +99,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        getIntentFromBasket();
+        getIntentFromItemSelectionActivity();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -124,20 +125,21 @@ public class MenuActivity extends AppCompatActivity {
 
         }
 
-    private void getIntentFromBasket(){
+    private void getIntentFromItemSelectionActivity(){
 
         if (getIntent().hasExtra("item_name")
                 && getIntent().hasExtra("item_description")
-                && getIntent().hasExtra("item_price")
-                && getIntent().hasExtra("counter_value")){
+                && getIntent().hasExtra("item_image")
+                && getIntent().hasExtra("item_price")){
 
             String itemNameX = getIntent().getStringExtra("item_name");
             String itemDescription = getIntent().getStringExtra("item_description");
             double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
+            int itemImage = getIntent().getIntExtra("item_image", 2131165283);
             int counterValue = getIntent().getIntExtra("counter_value", 1);
             System.out.println("RECEIVED FROM ITEM SELECTION " + itemNameX + " " + itemDescription + " " + counterValue + " Times");
 
-            addItemsToStaticList(counterValue, itemNameX, itemDescription, itemPrice);
+            addItemsToStaticList(counterValue, itemNameX, itemDescription, itemPrice, itemImage);
             showBottomNavBar();
 
             System.out.println(selectedItemsList.size() + " The size of selected items list " + selectedItemsList);
@@ -145,21 +147,20 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    public void addItemsToStaticList(int counter, String name, String description, double price){
+    public void addItemsToStaticList(int counter, String name, String description, double price, int image){
 
         for (int i = 0; i < counter; i++) {
-
 
             item2.itemName = name;
             item2.itemDescription = description;
             item2.price = price;
+            item2.itemImage = image;
             totalPrice += item2.price;
-
             selectedItemsList.add(item2);
-
         }
     }
 
+    // passing data to basket activity
     public void showBottomNavBar(){
 
         if (selectedItemsList.size() > 0) {
@@ -174,7 +175,12 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(),BasketActivity.class);
+                    intent.putExtra("item_name", item2.itemName);
+                    intent.putExtra("item_price", item2.price);
+                    intent.putExtra("item_description", item2.itemDescription);
+                    intent.putExtra("item_image", item2.itemImage);
                     v.getContext().startActivity(intent);
+                    System.out.println("DATA SENT TO BASKET ACTIVITY FROM MENU ACTIVITY:");
                 }
             });
         }
