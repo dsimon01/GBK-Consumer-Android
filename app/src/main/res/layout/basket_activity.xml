@@ -10,13 +10,72 @@
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/toolbarBasket"
         android:background="@color/colorAccent"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="My Basket" />
+
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/recyclerViewBasket"
             android:layout_below="@id/toolbarBasket" />
+
+    <ImageView
+        android:id="@+id/binImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/toolbarBasket"
+        android:layout_alignRight="@+id/toolbarBasket"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        app:srcCompat="@drawable/bin_icon" />
+
+    <TextView
+        android:id="@+id/totalItemCount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="149dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:text="TOTAL"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="208dp"
+        android:layout_marginLeft="208dp"
+        android:layout_marginTop="147dp"
+        android:layout_toEndOf="@+id/totalItemCount2"
+        android:layout_toRightOf="@+id/totalItemCount2"
+        android:text="£30.95"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="28sp" />
+
+
+    <Button
+        android:id="@+id/placeOrderButton"
+        android:onClick="onPlaceOrderClick"
+        android:layout_width="388dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="102dp"
+        android:layout_marginLeft="102dp"
+        android:layout_marginTop="280dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:text="Place order " />
 
 </RelativeLayout>
 
