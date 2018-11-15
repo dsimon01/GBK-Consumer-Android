@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 import com.google.gson.Gson;
@@ -19,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class BasketActivity extends AppCompatActivity {
@@ -28,6 +31,8 @@ public class BasketActivity extends AppCompatActivity {
     ArrayList<String> itemNamesList , itemDescriptionList;
     ArrayList<Double> itemPriceList;
     ArrayList<Integer> itemImageList;
+    ImageView bin;
+    TextView totalPrice;
 
     Items item = new Items();
     RecyclerView basketRecyclerView;
@@ -45,8 +50,11 @@ public class BasketActivity extends AppCompatActivity {
         itemImageList = new ArrayList<>();
         itemDescriptionList = new ArrayList<>();
         basketRecyclerView = findViewById(R.id.recyclerViewBasket);
-
+        bin = findViewById(R.id.binImage);
+        totalPrice = findViewById(R.id.totalPrice);
         json = gson.toJson(MenuActivity.selectedItemsList);
+
+        totalPrice.setText((String.format(Locale.ENGLISH, "£%.2f", MenuActivity.totalPrice)));
 
         JSONArray jsonarray = null;
 
@@ -103,7 +111,21 @@ public class BasketActivity extends AppCompatActivity {
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
         basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
+
+        bin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                System.out.println("BIN CLICKED:");
+                MenuActivity.totalPrice = 0.00;
+                MenuActivity.selectedItemsList.clear();
+                Intent intent = new Intent(BasketActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     public void onPlaceOrderClick(View view){
         System.out.println("PLACED ORDER");
