@@ -1,5 +1,7 @@
 package com.gbk.simoni.gbk;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -27,13 +29,14 @@ import java.util.Random;
 public class BasketActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    AlertDialog alertDialog;
+    AlertDialog.Builder builder;
     static List<Items> orderItems;
     ArrayList<String> itemNamesList , itemDescriptionList;
     ArrayList<Double> itemPriceList;
     ArrayList<Integer> itemImageList;
     ImageView bin;
     TextView totalPrice;
-
     Items item = new Items();
     RecyclerView basketRecyclerView;
     Gson gson = new Gson();
@@ -117,10 +120,7 @@ public class BasketActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 System.out.println("BIN CLICKED:");
-                MenuActivity.totalPrice = 0.00;
-                MenuActivity.selectedItemsList.clear();
-                Intent intent = new Intent(BasketActivity.this, MenuActivity.class);
-                startActivity(intent);
+                setDialog();
             }
         });
     }
@@ -160,5 +160,36 @@ public class BasketActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void setDialog() {
+
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage("Remove all items in basket?");
+        builder.setPositiveButton("REMOVE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                System.out.println("clicked on remove!");
+                MenuActivity.totalPrice = 0.00;
+                MenuActivity.selectedItemsList.clear();
+                Intent intent = new Intent(BasketActivity.this, MenuActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                System.out.println("clicked on cancel");
+
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }
