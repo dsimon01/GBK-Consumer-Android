@@ -10,12 +10,16 @@ import android.widget.Toast;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
+    // In order to use a recycler view a ViewHolder class has to be implemented.
+    // In this project there are 2 recycler views so I am using the same class for both cases.
 
+    // MENU ACTIVITY:
     ImageView image;
     TextView name;
     TextView price;
     TextView desc;
 
+    // BASKET ACTIVITY
     ImageView basketImg;
     TextView basketName;
     TextView basketPrice;
@@ -23,10 +27,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
+        //MENU ACTIVITY:
         image = itemView.findViewById(R.id.image_view_recycler);
         name = itemView.findViewById(R.id.name_textView);
         price = itemView.findViewById(R.id.price_textV);
         desc = itemView.findViewById(R.id.desc_textV);
+        //BASKET:
         basketImg = itemView.findViewById(R.id.basket_image_view_recycler);
         basketName = itemView.findViewById(R.id.itemNameBasketView);
         basketPrice = itemView.findViewById(R.id.itemPriceBasket);

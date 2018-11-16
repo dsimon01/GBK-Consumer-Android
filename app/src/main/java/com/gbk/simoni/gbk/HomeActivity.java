@@ -8,7 +8,7 @@ import android.view.View;
 public class HomeActivity extends AppCompatActivity {
 
 
-//When the button to view menu is pressed by the user, they will be redirected to the Menu Activity.
+//When the addToBasketButton to view menu is pressed by the user, they will be redirected to the Menu Activity.
     public void onViewMenuClick(View view){
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
         startActivity(intent);

@@ -3,19 +3,16 @@ package com.gbk.simoni.gbk;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //When the user selects the login button:
+    //When the user selects the login addToBasketButton:
     public void onLoginClick(View view){
 
         //locate their input for username and password and assign them to corresponding vars.
