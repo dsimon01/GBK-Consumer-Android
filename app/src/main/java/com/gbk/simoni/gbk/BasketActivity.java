@@ -45,7 +45,7 @@ public class BasketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.basket_activity);   // ===========================  REMOVE THE OTHER BASKET ACTIVITY BUT TAKE BUTTON CODE
+        setContentView(R.layout.basket_activity);
 
         orderItems = new ArrayList<>();
         itemNamesList = new ArrayList<>();
@@ -56,7 +56,6 @@ public class BasketActivity extends AppCompatActivity {
         bin = findViewById(R.id.binImage);
         totalPrice = findViewById(R.id.totalPrice);
         json = gson.toJson(MenuActivity.selectedItemsList);
-
         totalPrice.setText((String.format(Locale.ENGLISH, "£%.2f", MenuActivity.totalPrice)));
 
         JSONArray jsonarray = null;

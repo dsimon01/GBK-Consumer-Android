@@ -13,29 +13,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-
-// TODO - > Improve designs in item selection
-// TODO - > Simply list the order items added to the basked activity
-// TODO - > Test the Basket activity behaviour
-// TODO - > Review code and add comments
-// TODO - > TODO for the next day
 
 public class MenuActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    static double totalPrice = 0.00;
     Items item2 = new Items();
-
-
+    List<Items> menuItem = new ArrayList<>(); // List of Items used to populate the recycler
+    static double totalPrice = 0.00;
     static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
+
+    // MENU ITEM DETAILS IN ARRAYS :
 
     String[] itemName = {
 
@@ -70,9 +62,9 @@ public class MenuActivity extends AppCompatActivity {
             "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
             "House mayo, mature Cheddar, relish, salad, chilli fried egg.",
             "Two 6oz patties, mature Cheddar, crispy bacon, garlic mayo, relish, dill pickle.",
-            "American cheese, homemade onion ring, Cajun relish, chipotle mayo, dill pickle, salad.",
+            "American cheese, homemade onion ring, Cajun relish, chipotle mayo.",
             "Onion jam, Cajun relish, house mayo, dill pickle, salad.",
-            "6oz beef, mature Cheddar, beetroot, fried egg, grilled pineapple, house mayo, relish, salad",
+            "6oz beef, mature Cheddar, beetroot, fried egg, grilled pineapple.",
             "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
             "Smashed avocado, crispy bacon, house mayo, relish.",
             "American and mature Cheddar cheese, chilli fried egg, basil mayo, habanero jam.",
@@ -99,15 +91,43 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        // call to a method tha defines the toolbar & collapsing toolbar of the activity
+        setToolbarUI();
+
+        // call to method that creates a menuItem list which is used to populate the recycler view
+        // The list contains of Item objects, and their attributes are defined from the specified
+        // arrays above -> Line 33 to 88
+        createMenuItemsList();
+
+        // call to a method that arranges the UI in the Menu Activity
+        // Sets the context of this activity with LinearLayoutManager
+        // Uses GridLayoutManger to apply a grid to the view
+        // Calls the RecyclerAdapter class with the menu Items as a parameter.
+        setRecyclerView();
+
+        // call to a method that takes the data passed from the Item Selection Activity,
+        // and with an internal method call to "addItemsToSelectedItemsList" method converts
+        //the incoming data into an Item object and adds it an Items list.
         getIntentFromItemSelectionActivity();
 
+        // call to a method that checks if the Items list has at least one item.
+        // if it does, then a bottom navigation bar is displayed to the UI which allows the user
+        // to enter the Basket Activity.
+        // Calls internally another 2 methods that display the total amount and total item count
+        // within the navigation bar.
+        showBottomNavBar();
+
+    }
+
+    private void setToolbarUI(){
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(000);
         recyclerView = findViewById(R.id.recycler_view_id);
+    }
 
-        List<Items> menuItem = new ArrayList<>();
+    private void createMenuItemsList() {
         for (int i = 0; i < itemName.length; i++) {
             Items item = new Items();
             item.itemName = itemName[i];
@@ -116,14 +136,15 @@ public class MenuActivity extends AppCompatActivity {
             item.itemImage = image[i];
             menuItem.add(item);
         }
+    }
 
+    private void setRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setAdapter(new RecyclerAdapter(menuItem));
-
-        }
+    }
 
     private void getIntentFromItemSelectionActivity(){
 
@@ -132,25 +153,30 @@ public class MenuActivity extends AppCompatActivity {
                 && getIntent().hasExtra("item_image")
                 && getIntent().hasExtra("item_price")){
 
-            String itemNameX = getIntent().getStringExtra("item_name");
+            String itemName = getIntent().getStringExtra("item_name");
             String itemDescription = getIntent().getStringExtra("item_description");
             double itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
             int itemImage = getIntent().getIntExtra("item_image", 2131165283);
             int counterValue = getIntent().getIntExtra("counter_value", 1);
-            System.out.println("RECEIVED FROM ITEM SELECTION " + itemNameX + " " + itemDescription + " " + counterValue + " Times");
 
-            addItemsToStaticList(counterValue, itemNameX, itemDescription, itemPrice, itemImage);
-            showBottomNavBar();
+            System.out.println("MENU ACTIVITY RECEIVED FROM ITEM SELECTION ACTIVITY: " + itemName
+                    + " " + itemDescription + " " + counterValue + " Times");
 
-            System.out.println(selectedItemsList.size() + " The size of selected items list " + selectedItemsList);
+            // call to method that takes the information from Item Selection Activity in its
+            // parameters and creates a new Items object that is added to a new Items list.
+            addItemsToSelectedItemsList(counterValue, itemName, itemDescription,
+                    itemPrice, itemImage);
+
+            System.out.println(selectedItemsList.size() +
+                    " The size of selected items list " + selectedItemsList);
         }
 
     }
 
-    public void addItemsToStaticList(int counter, String name, String description, double price, int image){
+    public void addItemsToSelectedItemsList(int counter, String name, String description,
+                                            double price, int image){
 
         for (int i = 0; i < counter; i++) {
-
             item2.itemName = name;
             item2.itemDescription = description;
             item2.price = price;
@@ -160,7 +186,6 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    // passing data to basket activity
     public void showBottomNavBar(){
 
         if (selectedItemsList.size() > 0) {
@@ -175,34 +200,25 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(),BasketActivity.class);
-                    intent.putExtra("item_name", item2.itemName);
-                    intent.putExtra("item_price", item2.price);
-                    intent.putExtra("item_description", item2.itemDescription);
-                    intent.putExtra("item_image", item2.itemImage);
                     v.getContext().startActivity(intent);
-                    System.out.println("DATA SENT TO BASKET ACTIVITY FROM MENU ACTIVITY:");
                 }
             });
         }
     }
 
     public void showPrice(){
-
         TextView price = findViewById(R.id.priceBottomNavBar);
         price.setText(String.format(Locale.ENGLISH, "£%.2f", totalPrice));
         System.out.println(totalPrice + " THE CURRENT TOTAL PRICE");
-
     }
 
     public void showItemCount(){
-
         TextView itemCount = findViewById(R.id.itemCountBottomNavBar);
         if (selectedItemsList.size() > 1){
-            itemCount.setText(String.format("%s Items", Integer.toString(selectedItemsList.size())));
+            itemCount.setText(String.format("%s Items",Integer.toString(selectedItemsList.size())));
         }
-
         if (selectedItemsList.size() <= 1){
-            itemCount.setText(String.format("%s Item", Integer.toString(selectedItemsList.size())));
+            itemCount.setText(String.format("%s Item",Integer.toString(selectedItemsList.size())));
         }
     }
 }
