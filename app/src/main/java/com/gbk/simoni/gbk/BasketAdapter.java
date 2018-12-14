@@ -81,10 +81,4 @@ public class BasketAdapter extends RecyclerView.Adapter<ViewHolder> {
         return items.size();
 
     }
-
-
-    public void setDialog() {
-
-
-    }
 }
