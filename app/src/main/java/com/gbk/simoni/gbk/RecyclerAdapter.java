@@ -1,5 +1,6 @@
 package com.gbk.simoni.gbk;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -42,7 +46,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.name.setText(menuItem.itemName);
         viewHolder.price.setText(String.format(Locale.ENGLISH, "£%.2f", menuItem.price));
         viewHolder.desc.setText(menuItem.itemDescription);
-        viewHolder.image.setImageResource(menuItem.itemImage);
+      //  viewHolder.image.setImageResource(menuItem.itemImage);
+
+        Glide.with(viewHolder.itemView).load(menuItem.itemImage).into(viewHolder.image);
 
          //System.out.println(menuItem);   = >  com.gbk.simoni.gbk.Items@ee5429c
         // System.out.println(menuItem.itemName);  = > Gourmet Very Spicy
