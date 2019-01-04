@@ -1,6 +1,8 @@
 package com.gbk.simoni.gbk;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +43,8 @@ public class BasketActivity extends AppCompatActivity {
     RecyclerView basketRecyclerView;
     Gson gson = new Gson();
     String json;
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,9 @@ public class BasketActivity extends AppCompatActivity {
         json = gson.toJson(MenuActivity.selectedItemsList);
         totalPrice.setText((String.format(Locale.ENGLISH, "£%.2f", MenuActivity.totalPrice)));
 
+        dialog = new ProgressDialog(BasketActivity.this);
+        dialog.setTitle("Processing your order");
+        dialog.setMessage("Please wait...");
         JSONArray jsonarray = null;
 
         try {
@@ -127,38 +134,50 @@ public class BasketActivity extends AppCompatActivity {
 
 
     public void onPlaceOrderClick(View view){
-        System.out.println("PLACED ORDER");
-        final int orderNumber = new Random().nextInt(9000) + 1000; // [0,8999] + 1000 => [1000, 9999]
-        ParseObject order = new ParseObject("Order");
-        order.put("TableNumber", ParseUser.getCurrentUser().getUsername());
-        order.put("OrderID", orderNumber);
-        order.put("Status", "new");
-        order.put("Item", itemNamesList);
-        order.put("Description", itemDescriptionList);
-        order.put("Image", itemImageList);
-        order.put("Price", itemPriceList);
-        order.saveInBackground(new SaveCallback() {
+
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void done(ParseException e) {
-                if (e == null){
-                    Toast.makeText(BasketActivity.this, "Order is now COOKING", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), OrderUpdatesActivity.class);
-                    startActivity(intent);
-                }else {
-                    e.printStackTrace();
-                }
+            public void run() {
+
+                System.out.println("PLACED ORDER");
+                final int orderNumber = new Random().nextInt(9000) + 1000; // [0,8999] + 1000 => [1000, 9999]
+                ParseObject order = new ParseObject("Order");
+                order.put("TableNumber", ParseUser.getCurrentUser().getUsername());
+                order.put("OrderID", orderNumber);
+                order.put("Status", "new");
+                order.put("Item", itemNamesList);
+                order.put("Description", itemDescriptionList);
+                order.put("Image", itemImageList);
+                order.put("Price", itemPriceList);
+                order.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null){
+                            Toast.makeText(BasketActivity.this, "Order is now COOKING", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), OrderUpdatesActivity.class);
+                            startActivity(intent);
+                        }else {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                order.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException ex) {
+                        if (ex == null) {
+                            Log.i("Parse Result", "Successful!");
+                        } else {
+                            Log.i("Parse Result", "Failed" + ex.toString());
+                        }
+                    }
+                });
+
+                dialog.cancel();
             }
-        });
-        order.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException ex) {
-                if (ex == null) {
-                    Log.i("Parse Result", "Successful!");
-                } else {
-                    Log.i("Parse Result", "Failed" + ex.toString());
-                }
-            }
-        });
+        }, 2000);
     }
 
     public void setDialog() {

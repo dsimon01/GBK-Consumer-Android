@@ -12,7 +12,9 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 
 
     <style name="AppTheme.TransparentTheme">
