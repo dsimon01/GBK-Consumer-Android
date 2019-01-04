@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,14 +22,14 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 // Activity for order updates:
 
     RecyclerView basketRecyclerView;
-    Handler handler;
-    Runnable runnable;
-    Timer timer;
+  //  Handler handler;
+  //  Runnable runnable;
+   // Timer timer;
     TextView time;
     Calendar now;
     ImageView clock;
     ProgressBar progressBar;
-    int i = 0;
+   // int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +41,33 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.linearProgressBar);
         progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(0);
-        progressBar.setMax(100);
+     //   progressBar.setProgress(0);
+     //   progressBar.setMax(100);
 
-        handler = new Handler();
-        runnable = new Runnable() {
-            @Override
-            public void run() {
+    //    handler = new Handler();
+      //  runnable = new Runnable() {
+        //    @Override
+          //  public void run() {
 
-                if (++i <= 100){
+            //    if (++i <= 100){
 
-                    progressBar.setProgress(i);
+              //      progressBar.setProgress(i);
 
-                }else {
+                //}else {
 
-                    timer.cancel();
-                }
+                  //  timer.cancel();
+                //}
 
-            }
-        };
+          //  }
+        //};
 
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(runnable);
-            }
-        }, 8000, 1000);
+       // timer = new Timer();
+        //timer.schedule(new TimerTask() {
+          //  @Override
+           // public void run() {
+             //   handler.post(runnable);
+           // }
+       // }, 8000, 1000);
 
         now = Calendar.getInstance();
         now.add(Calendar.MINUTE, 30);
@@ -80,7 +81,12 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
         basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
-
-
     }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed(); commented this line in order to disable back press
+        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
+    }
+
 }
