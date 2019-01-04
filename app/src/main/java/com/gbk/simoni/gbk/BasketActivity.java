@@ -44,6 +44,7 @@ public class BasketActivity extends AppCompatActivity {
     Gson gson = new Gson();
     String json;
     ProgressDialog dialog;
+    static int orderNumber;
 
 
     @Override
@@ -143,7 +144,7 @@ public class BasketActivity extends AppCompatActivity {
             public void run() {
 
                 System.out.println("PLACED ORDER");
-                final int orderNumber = new Random().nextInt(9000) + 1000; // [0,8999] + 1000 => [1000, 9999]
+                orderNumber = new Random().nextInt(9000) + 1000; // [0,8999] + 1000 => [1000, 9999]
                 ParseObject order = new ParseObject("Order");
                 order.put("TableNumber", ParseUser.getCurrentUser().getUsername());
                 order.put("OrderID", orderNumber);
@@ -208,6 +209,5 @@ public class BasketActivity extends AppCompatActivity {
 
         alertDialog = builder.create();
         alertDialog.show();
-
     }
 }
