@@ -1,6 +1,5 @@
 package com.gbk.simoni.gbk;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,22 +13,16 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Timer;
-import java.util.TimerTask;
-
 
 public class OrderUpdatesActivity extends AppCompatActivity {
 
 // Activity for order updates:
 
     RecyclerView basketRecyclerView;
-  //  Handler handler;
-  //  Runnable runnable;
-   // Timer timer;
     TextView time;
     Calendar now;
     ImageView clock;
     ProgressBar progressBar;
-   // int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,34 +34,6 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.linearProgressBar);
         progressBar.setVisibility(View.VISIBLE);
-     //   progressBar.setProgress(0);
-     //   progressBar.setMax(100);
-
-    //    handler = new Handler();
-      //  runnable = new Runnable() {
-        //    @Override
-          //  public void run() {
-
-            //    if (++i <= 100){
-
-              //      progressBar.setProgress(i);
-
-                //}else {
-
-                  //  timer.cancel();
-                //}
-
-          //  }
-        //};
-
-       // timer = new Timer();
-        //timer.schedule(new TimerTask() {
-          //  @Override
-           // public void run() {
-             //   handler.post(runnable);
-           // }
-       // }, 8000, 1000);
-
         now = Calendar.getInstance();
         now.add(Calendar.MINUTE, 30);
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -81,6 +46,9 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
         basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
+
+        Timer timer = new Timer();
+        timer.schedule(new Ping(), 0, 10000);
     }
 
     @Override
