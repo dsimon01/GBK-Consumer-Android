@@ -1,5 +1,6 @@
 package com.gbk.simoni.gbk;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,15 +19,16 @@ import com.parse.ParseQuery;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class OrderUpdatesActivity extends AppCompatActivity {
 
 // Activity for order updates:
 
     RecyclerView basketRecyclerView;
-    TextView time;
+    TextView time, prep, hurray, collect;
     Calendar now;
-    ImageView clock;
+    ImageView clock, food;
     ProgressBar progressBar;
     Boolean orderReady;
 
@@ -41,10 +43,22 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
         time = findViewById(R.id.estimatedPrepTimeTextView);
         clock = findViewById(R.id.clock);
+        prep = findViewById(R.id.textViewPrep);
+        hurray = findViewById(R.id.hurrayTextView);
+        collect = findViewById(R.id.collectTextView);
+        food = findViewById(R.id.foodImageView);
         progressBar = findViewById(R.id.linearProgressBar);
         progressBar.setVisibility(View.VISIBLE);
         now = Calendar.getInstance();
-        now.add(Calendar.MINUTE, 30);
+
+        if (MenuActivity.selectedItemsList.size() <= 2){
+            now.add(Calendar.MINUTE, 10);
+        }else if (MenuActivity.selectedItemsList.size() > 2 && MenuActivity.selectedItemsList.size() <= 5){
+            now.add(Calendar.MINUTE, 20);
+        }else {
+            now.add(Calendar.MINUTE, 30);
+        }
+
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         System.out.println("Estimated time is: " + timeFormat.format(now.getTime()));
         orderReady = false;
@@ -67,6 +81,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                                     System.out.println("ORDER IS READY");
                                     // call method to update text views and return to home screen after 5 minutes - collect from till number
                                         updateOrder();
+                                        object.deleteInBackground(); // delete from DB once ready works
                                 }else {
                                     System.out.println("ORDER NOT READY");
                                 }
@@ -98,8 +113,28 @@ public class OrderUpdatesActivity extends AppCompatActivity {
     }
 
     public void updateOrder(){
+
+        int collectionPoint = new Random().nextInt(11) + 1; // [0,10] + 1 => [1, 10]
+
         progressBar.setVisibility(View.GONE);
         clock.setVisibility(View.GONE);
-        time.setText("Hooray your order is ready");
+        time.setVisibility(View.GONE);
+        prep.setVisibility(View.GONE);
+        hurray.setVisibility(View.VISIBLE);
+        food.setVisibility(View.VISIBLE);
+        collect.setText("Please collect from counter " + Integer.toString(collectionPoint)
+                + ", your order number is #" + BasketActivity.orderNumber);
+        collect.setVisibility(View.VISIBLE);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MenuActivity.selectedItemsList.clear();
+                MenuActivity.totalPrice = 0.00;
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+            }
+        }, 12000);
     }
 }
