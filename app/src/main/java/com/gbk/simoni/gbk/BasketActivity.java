@@ -38,7 +38,7 @@ public class BasketActivity extends AppCompatActivity {
     ArrayList<Double> itemPriceList;
     ArrayList<Integer> itemImageList;
     ImageView bin;
-    TextView totalPrice;
+    TextView totalPrice, itemNumberSummary;
     Items item = new Items();
     RecyclerView basketRecyclerView;
     Gson gson = new Gson();
@@ -58,10 +58,12 @@ public class BasketActivity extends AppCompatActivity {
         itemImageList = new ArrayList<>();
         itemDescriptionList = new ArrayList<>();
         basketRecyclerView = findViewById(R.id.recyclerViewBasket);
+        itemNumberSummary = findViewById(R.id.itemNumberSummary);
         bin = findViewById(R.id.binImage);
         totalPrice = findViewById(R.id.totalPrice);
         json = gson.toJson(MenuActivity.selectedItemsList);
         totalPrice.setText((String.format(Locale.ENGLISH, "£%.2f", MenuActivity.totalPrice)));
+        itemNumberSummary.setText(Integer.toString(MenuActivity.selectedItemsList.size()));
 
         dialog = new ProgressDialog(BasketActivity.this);
         dialog.setTitle("Processing your order");

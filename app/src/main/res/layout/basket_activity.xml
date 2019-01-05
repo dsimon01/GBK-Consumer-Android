@@ -14,11 +14,133 @@
         app:title="My Basket" />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerViewBasket"
-            android:layout_below="@id/toolbarBasket" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewBasket"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarBasket"
+        android:layout_marginTop="-1dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/gbkHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="125dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="105dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:padding="5dp"
+        android:text="Gourmet Burger Kitchen"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/gbkSubheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="233dp"
+        android:layout_marginLeft="233dp"
+        android:layout_marginTop="147dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:text="London"
+        android:textAllCaps="true"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/orderSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="234dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:text="Order Summary:"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/numberOfItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="300dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:text="Number of items"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/itemNumberSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="142dp"
+        android:layout_marginLeft="142dp"
+        android:layout_marginTop="302dp"
+        android:layout_toEndOf="@+id/numberOfItems"
+        android:layout_toRightOf="@+id/numberOfItems"
+        android:text="10"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/totalItemCount4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="345dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:text="Tax on order "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/totalPrice3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="171dp"
+        android:layout_marginLeft="171dp"
+        android:layout_marginTop="345dp"
+        android:layout_toEndOf="@+id/totalItemCount4"
+        android:layout_toRightOf="@+id/totalItemCount4"
+        android:text="20%"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/totalItemCount5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="385dp"
+        android:layout_toEndOf="@+id/recyclerViewBasket"
+        android:layout_toRightOf="@+id/recyclerViewBasket"
+        android:text="Service charge"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/totalPrice4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="159dp"
+        android:layout_marginLeft="159dp"
+        android:layout_marginTop="385dp"
+        android:layout_toEndOf="@+id/totalItemCount5"
+        android:layout_toRightOf="@+id/totalItemCount5"
+        android:text="FREE"
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/binImage"
@@ -39,43 +161,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="110dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="430dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
         android:text="TOTAL"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/totalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="208dp"
-        android:layout_marginLeft="208dp"
-        android:layout_marginTop="147dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="429dp"
         android:layout_toEndOf="@+id/totalItemCount2"
         android:layout_toRightOf="@+id/totalItemCount2"
         android:text="£30.95"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="28sp" />
-
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/placeOrderButton"
-        android:onClick="onPlaceOrderClick"
-        android:layout_width="388dp"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorPrimary"
+        android:layout_width="480dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="102dp"
-        android:layout_marginLeft="102dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginLeft="71dp"
+        android:layout_marginTop="516dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
-        android:text="Place order " />
+        android:background="@color/colorAccent"
+        android:onClick="onPlaceOrderClick"
+        android:text="Place order "
+        android:textColor="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="113dp"
+        android:layout_height="99dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        app:srcCompat="@drawable/gbklogo" />
 
 </RelativeLayout>
 

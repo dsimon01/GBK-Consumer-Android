@@ -135,6 +135,6 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             }
-        }, 12000);
+        }, 60000);
     }
 }
