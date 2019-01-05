@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#028778</color>
     <color name="colorFab">#FFF</color>
+    <color name="recyclerBasketBg">#F5F5F5</color>
 </resources>

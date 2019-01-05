@@ -39,7 +39,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
 
         final Handler handler = new Handler();
-        final int delay = 15000; //milliseconds
+        final int delay = 5000; //milliseconds
 
         time = findViewById(R.id.estimatedPrepTimeTextView);
         clock = findViewById(R.id.clock);
@@ -77,13 +77,16 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                         if (e == null && objects != null) {
                             for (ParseObject object : objects) {
 
-                                if (object.getString("Status").equals("Ready")) {
+                                if (object.getString("Status").equals("ready")) {
                                     System.out.println("ORDER IS READY");
                                     // call method to update text views and return to home screen after 5 minutes - collect from till number
                                         updateOrder();
                                         object.deleteInBackground(); // delete from DB once ready works
+                                        handler.removeCallbacksAndMessages(null);
                                 }else {
+                                    System.out.println("The status of the order is: " + object.getString("Status"));
                                     System.out.println("ORDER NOT READY");
+                                    System.out.println("Order number " + BasketActivity.orderNumber);
                                 }
                             }
                         } else {
@@ -114,7 +117,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
     public void updateOrder(){
 
-        int collectionPoint = new Random().nextInt(11) + 1; // [0,10] + 1 => [1, 10]
+        int collectionPoint = new Random().nextInt(10) + 1; // [0,10] + 1 => [1, 10]
 
         progressBar.setVisibility(View.GONE);
         clock.setVisibility(View.GONE);
@@ -130,11 +133,12 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                System.out.println("Redirect to home screen schedule");
                 MenuActivity.selectedItemsList.clear();
                 MenuActivity.totalPrice = 0.00;
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             }
-        }, 60000);
+        }, 10000);
     }
 }
