@@ -10,9 +10,10 @@
 
     <application
         android:name=".ParseServerConfig"
+        android:label="The GBK"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_gbk_launcher_round"
+        android:roundIcon="@mipmap/ic_gbk_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
