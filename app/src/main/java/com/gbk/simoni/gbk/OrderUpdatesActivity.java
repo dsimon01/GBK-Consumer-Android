@@ -39,7 +39,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
 
         final Handler handler = new Handler();
-        final int delay = 5000; //milliseconds
+        final int delay = 15000; //milliseconds
 
         time = findViewById(R.id.estimatedPrepTimeTextView);
         clock = findViewById(R.id.clock);
@@ -81,7 +81,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                                     System.out.println("ORDER IS READY");
                                     // call method to update text views and return to home screen after 5 minutes - collect from till number
                                         updateOrder();
-                                        object.deleteInBackground(); // delete from DB once ready works
+                                        object.deleteInBackground(); // delete from DB once ready
                                         handler.removeCallbacksAndMessages(null);
                                 }else {
                                     System.out.println("The status of the order is: " + object.getString("Status"));
