@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
         // code that keeps user logged in to the app, avoiding the login screen
         // redirecting to Home activity.
 
-
+/*
         if (ParseUser.getCurrentUser() != null){
             Intent alreadyLoggedIn = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(alreadyLoggedIn);
         }
-
+*/
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 }

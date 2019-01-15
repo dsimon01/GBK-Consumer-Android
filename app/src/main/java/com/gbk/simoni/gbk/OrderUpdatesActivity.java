@@ -104,7 +104,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
-        basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
+        basketRecyclerView.setAdapter(new OrderUpdatesAdapter(MenuActivity.selectedItemsList));
 
         System.out.println("ORDER NUMBER RETURNED " + BasketActivity.orderNumber);
     }
