@@ -13,16 +13,11 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-public class LoginActivity extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnKeyListener,
+        View.OnClickListener {
 
     EditText username;
     EditText password;
-
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed(); commented this line in order to disable back press
-        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +30,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
         background.setOnClickListener(this);
     }
 
+    // onKey and onClick Methods are used for advanced keyboard handling in the login screen.
+
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-
+        //When ENTER or the NEXT key is pressed after entering the password, calls the login method
         if (keyCode == event.KEYCODE_ENTER && event.getAction() == event.ACTION_DOWN) {
             onLoginClick(v);
         }
@@ -45,8 +42,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
     }
 
     public void onClick(View view){
+        // When user touches anywhere in the background then the keyboard disappears.
         if (view.getId() == R.id.backgroundLayout || view.getId() == R.id.loginImageView){
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            InputMethodManager inputMethodManager = (InputMethodManager)
+                    getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
@@ -54,13 +53,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
     //When the user selects the login addToBasketButton:
     public void onLoginClick(View view) {
 
-        //error handling for the incorrect input.
-        if (username.getText().toString().matches("") || password.getText().toString().matches("")) {
-            Toast.makeText(this, "Username/Password required", Toast.LENGTH_SHORT).show();
+        //error handling for empty input.
+        if (username.getText().toString().matches("") ||
+                password.getText().toString().matches("")) {
+            Toast.makeText(this, "Username/Password required",
+                    Toast.LENGTH_SHORT).show();
         } else {
-            //validate the user input with the credentials stored in the server and attempt to login.
+            //validates the user input with the credentials stored in the server
+            // and attempts to login.
             //upon successful login, redirects the user to the Home activity
-            ParseUser.logInInBackground(username.getText().toString(), password.getText().toString(), new LogInCallback() {
+            ParseUser.logInInBackground(username.getText().toString(),
+                    password.getText().toString(), new LogInCallback() {
                 @Override
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
@@ -68,11 +71,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
                         startActivity(intent);
                     } else {
                         //if login fails show error in Toast.
-                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed(); commented this line in order to disable back press
+        Toast.makeText(getApplicationContext(), "Back press disabled!",
+                Toast.LENGTH_SHORT).show();
     }
 }
 

@@ -30,17 +30,21 @@ public class OrderUpdatesActivity extends AppCompatActivity {
     Calendar now;
     ImageView clock, food;
     ProgressBar progressBar;
-    Boolean orderReady;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_updates);
 
+        defineViews();
+        displayItemsInRecyclerView();
+        estimatedPreparationTime();
+        getOrderUpdates();
 
-        final Handler handler = new Handler();
-        final int delay = 15000; //milliseconds
+    }
 
+    public void defineViews(){
         time = findViewById(R.id.estimatedPrepTimeTextView);
         clock = findViewById(R.id.clock);
         prep = findViewById(R.id.textViewPrep);
@@ -49,20 +53,40 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         food = findViewById(R.id.foodImageView);
         progressBar = findViewById(R.id.linearProgressBar);
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void displayItemsInRecyclerView(){
+        basketRecyclerView = findViewById(R.id.recyclerViewBasket);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        basketRecyclerView.setLayoutManager(linearLayoutManager);
+        basketRecyclerView.setHasFixedSize(true);
+        basketRecyclerView.setAdapter(new OrderUpdatesAdapter(MenuActivity.selectedItemsList));
+    }
+
+    public void estimatedPreparationTime(){
+
         now = Calendar.getInstance();
 
         if (MenuActivity.selectedItemsList.size() <= 2){
             now.add(Calendar.MINUTE, 10);
-        }else if (MenuActivity.selectedItemsList.size() > 2 && MenuActivity.selectedItemsList.size() <= 5){
+        }else if (MenuActivity.selectedItemsList.size() > 2 &&
+                MenuActivity.selectedItemsList.size() <= 5){
             now.add(Calendar.MINUTE, 20);
         }else {
             now.add(Calendar.MINUTE, 30);
         }
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        System.out.println("Estimated time is: " + timeFormat.format(now.getTime()));
-        orderReady = false;
         time.setText(timeFormat.format(now.getTime()));
+
+        System.out.println("Estimated time is: " + timeFormat.format(now.getTime()));
+
+    }
+
+    public void getOrderUpdates(){
+
+        final Handler handler = new Handler();
+        final int delay = 15000; //milliseconds
 
         handler.postDelayed(new Runnable(){
             public void run(){
@@ -80,9 +104,9 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                                 if (object.getString("Status").equals("ready")) {
                                     System.out.println("ORDER IS READY");
                                     // call method to update text views and return to home screen after 5 minutes - collect from till number
-                                        updateOrder();
-                                        object.deleteInBackground(); // delete from DB once ready
-                                        handler.removeCallbacksAndMessages(null);
+                                    updateOrder();
+                                    object.deleteInBackground(); // delete from DB once ready
+                                    handler.removeCallbacksAndMessages(null);
                                 }else {
                                     System.out.println("The status of the order is: " + object.getString("Status"));
                                     System.out.println("ORDER NOT READY");
@@ -100,19 +124,6 @@ public class OrderUpdatesActivity extends AppCompatActivity {
             }
         }, delay);
 
-        basketRecyclerView = findViewById(R.id.recyclerViewBasket);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        basketRecyclerView.setLayoutManager(linearLayoutManager);
-        basketRecyclerView.setHasFixedSize(true);
-        basketRecyclerView.setAdapter(new OrderUpdatesAdapter(MenuActivity.selectedItemsList));
-
-        System.out.println("ORDER NUMBER RETURNED " + BasketActivity.orderNumber);
-    }
-
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed(); commented this line in order to disable back press
-        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
     }
 
     public void updateOrder(){
@@ -140,5 +151,11 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }, 10000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed(); commented this line in order to disable back press
+        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
     }
 }

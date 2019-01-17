@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //once the main activity is ready redirect to Log in screen.
+        //once the main activity is ready - redirects to Log in screen.
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
 

@@ -12,57 +12,33 @@ import android.widget.TextView;
 
 public class ItemSelectionActivity extends AppCompatActivity {
 
-    // Declarations:
+
     int counterValue = 1;
     Button addToBasketButton;
-    FloatingActionButton incrementCount;
-    FloatingActionButton decrementCount;
+    FloatingActionButton incrementCount, decrementCount;
     TextView itemsToAdd;
-    String itemName;
-    String itemDescription;
+    String itemName, itemDescription;
     double itemPrice;
     int itemImage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_selection_activity);
-
-        // Method call to retrieve data passed from the RecyclerAdapter and then calls internally
-        // another method which populates the activity resources with the data retrieved.
-        getIntentFromRecyclerAdapter();
-
         addToBasketButton = findViewById(R.id.addToBasketButton);
         incrementCount = findViewById(R.id.addFloatingActionButton);
         decrementCount = findViewById(R.id.removeFloatingActionButton);
         itemsToAdd = findViewById(R.id.numberOfItems);
 
+        // Method call to retrieve data passed from the RecyclerAdapter and then calls internally
+        // another method which populates the activity resources with the data retrieved.
+        getIntentFromRecyclerAdapter();
+
         // OnClickListener on when the user is incrementing the items to add in their basket.
-        incrementCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                counterValue = counterValue + 1;
-                itemsToAdd.setText(Integer.toString(counterValue));
-                addToBasketButton.setText("ADD " + counterValue + " ITEMS TO BASKET");
-                System.out.println(counterValue);
-            }
-        });
+        incrementListener();
 
         //OnClickListener on when the user is decrementing the items for their basket
         //the code below updates the text shown in the addToBasketButton to add items to basket.
-        decrementCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (counterValue > 1) {
-                    counterValue = counterValue - 1;
-                    itemsToAdd.setText(Integer.toString(counterValue));
-                    addToBasketButton.setText("ADD " + counterValue + " ITEMS TO BASKET");
-                }
-                if (counterValue == 1) {
-                    addToBasketButton.setText("ADD ITEM TO BASKET");
-                }
-                System.out.println(counterValue);
-            }
-        });
+        decrementListener();
     }
 
     private void getIntentFromRecyclerAdapter() {
@@ -80,6 +56,35 @@ public class ItemSelectionActivity extends AppCompatActivity {
         }
     }
 
+    public void incrementListener(){
+        incrementCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                counterValue = counterValue + 1;
+                itemsToAdd.setText(Integer.toString(counterValue));
+                addToBasketButton.setText("ADD " + counterValue + " ITEMS TO BASKET");
+                System.out.println(counterValue);
+            }
+        });
+    }
+
+    public void decrementListener(){
+            decrementCount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (counterValue > 1) {
+                        counterValue = counterValue - 1;
+                        itemsToAdd.setText(Integer.toString(counterValue));
+                        addToBasketButton.setText("ADD " + counterValue + " ITEMS TO BASKET");
+                    }
+                    if (counterValue == 1) {
+                        addToBasketButton.setText("ADD ITEM TO BASKET");
+                    }
+                    System.out.println(counterValue);
+                }
+            });
+        }
+
     private void setActivityContent(String itemName, String itemDescription, int image) {
 
         TextView name = findViewById(R.id.itemNameTextView);
@@ -92,7 +97,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
 
     // When the user is clicking on to add their items to the basket, the following code
     // is executed. All item data is passed to the Menu activity where it is converted into an Item
-    // object and added to the users selected items.
+    // object and added to the user's selected items.
     public void addToBasket(View view) {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("item_name", itemName);

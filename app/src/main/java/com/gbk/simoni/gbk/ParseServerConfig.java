@@ -11,6 +11,8 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 
+// This class is the first thing that executes when the project is run.
+
 public class ParseServerConfig extends Application {
 
     @Override
@@ -20,7 +22,7 @@ public class ParseServerConfig extends Application {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
-        // Config keys with Parse-Bitnami.
+        // Config keys with Parse Server.
         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                 .applicationId("a150e5d0e42666ddf6864edf392bed450d9bb305")
                 .clientKey("ec3b36f8e6eea59e2a7d52b4358efaf7594aaca8")
@@ -28,27 +30,6 @@ public class ParseServerConfig extends Application {
                 .build()
         );
 
-        /* Dummy code to create example objects programmatically:
-
-        ParseObject object = new ParseObject("ExampleObject");
-        object.put("myNumber", "123");
-        object.put("myString", "gourmet burger user");
-
-        object.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException ex) {
-                if (ex == null) {
-                    Log.i("Parse Result", "Successful!");
-                } else {
-                    Log.i("Parse Result", "Failed" + ex.toString());
-                }
-            }
-        });
-
-
-
-        ParseUser.enableAutomaticUser();
-*/
         ParseACL defaultACL = new ParseACL();
         defaultACL.setPublicReadAccess(true);
         defaultACL.setPublicWriteAccess(true);
@@ -56,3 +37,5 @@ public class ParseServerConfig extends Application {
 
     }
 }
+
+// Public documentation about Parse Server: https://docs.parseplatform.org/android/guide/

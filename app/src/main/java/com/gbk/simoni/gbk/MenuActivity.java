@@ -112,7 +112,7 @@ public class MenuActivity extends AppCompatActivity {
 
         // call to a method that checks if the Items list has at least one item.
         // if it does, then a bottom navigation bar is displayed to the UI which allows the user
-        // to enter the Basket Activity.
+        // to enter the Basket Activity if they tap on it.
         // Calls internally another 2 methods that display the total amount and total item count
         // within the navigation bar.
         showBottomNavBar();
