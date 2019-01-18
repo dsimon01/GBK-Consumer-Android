@@ -14,8 +14,9 @@
     <string name="view_basket">VIEW BASKET</string>
     <string name="_18_00">18:00</string>
     <string name="estimated_preparation_time">Estimated preparation time:</string>
-    <string name="hurray_your_order_is_ready">Hurrray! Your order is ready!</string>
-    <string name="please_collect_from_counter_x_your_order_number_is_1234">Please collect from counter X, your order number is #1234</string>
+    <string name="hurray_your_order_is_ready">Hurray! Your order is ready!</string>
+    <string name="please_collect_from_counter_x_your_order_number_is_1234">
+        Please collect from counter X, your order number is #1234</string>
     <string name="gourmet_burger_kitchen">Gourmet Burger Kitchen</string>
     <string name="london">London</string>
     <string name="order_summary">Order Summary:</string>
@@ -32,9 +33,10 @@
     <string name="burger_desc">Burger Desc</string>
     <string name="price">PRICE</string>
     <string name="desc">desc</string>
-    <string name="the_item_name">the_item_name</string>
-    <string name="the_item_description">the_item_description</string>
-    <string name="add_item_to_basket">add_item_to_basket</string>
-    <string name="if_you_have_any_food_allergies_intolerances_or_dietary_requirements_please_do_come_and_talk_to_us_directly_before_placing_your_order_we_can_answer_any_questions_you_have_about_the_ingredients_and_cooking_methods_we_use_to_find_out_more_about_this_restaurant_s_food_safety_visit_the_food_standards_agency">if_you_have_any_food_allergies_intolerances_or_dietary_requirements_please_do_come_and_talk_to_us_directly_before_placing_your_order_we_can_answer_any_questions_you_have_about_the_ingredients_and_cooking_methods_we_use_to_find_out_more_about_this_restaurant_s_food_safety_visit_the_food_standards_agency</string>
-    <string name="allergy_information">allergy_information</string>
+    <string name="the_item_name">the item name</string>
+    <string name="the_item_description">the item description</string>
+    <string name="add_item_to_basket">add item to basket</string>
+    <string name="if_you_have_any_food_allergies_intolerances_or_dietary_requirements_please_do_come_and_talk_to_us_directly_before_placing_your_order_we_can_answer_any_questions_you_have_about_the_ingredients_and_cooking_methods_we_use_to_find_out_more_about_this_restaurant_s_food_safety_visit_the_food_standards_agency">
+        If you have any food allergies, intolerances or dietary requirements, please do come and talk to us directly before placing your order. We can answer any questions you have about the ingredients and cooking methods we use. To find out more about this restaurant’s food safety, visit the Food Standards Agency.</string>
+    <string name="allergy_information">Allergy information</string>
 </resources>

@@ -131,6 +131,7 @@
         android:layout_marginRight="28dp"
         android:layout_marginBottom="108dp"
         android:padding="8dp"
+        android:gravity="start"
         android:text="@string/if_you_have_any_food_allergies_intolerances_or_dietary_requirements_please_do_come_and_talk_to_us_directly_before_placing_your_order_we_can_answer_any_questions_you_have_about_the_ingredients_and_cooking_methods_we_use_to_find_out_more_about_this_restaurant_s_food_safety_visit_the_food_standards_agency"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/addToBasketButton"
