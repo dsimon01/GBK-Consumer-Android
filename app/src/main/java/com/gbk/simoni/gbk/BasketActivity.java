@@ -24,27 +24,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 public class BasketActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    ProgressDialog dialog;
-    AlertDialog alertDialog;
-    AlertDialog.Builder builder;
-    ImageView bin;
-    TextView totalPrice, itemNumberSummary;
-    RecyclerView basketRecyclerView;
-    String json;
+
+    private ProgressDialog dialog;
     static int orderNumber;
-    static List<Items> orderItems;
-    ArrayList<String> itemNamesList , itemDescriptionList;
-    ArrayList<Double> itemPriceList;
-    ArrayList<Integer> itemImageList;
-    Items item = new Items();
-    Gson gson = new Gson();
+    private ArrayList<String> itemNamesList , itemDescriptionList;
+    private ArrayList<Double> itemPriceList;
+    private ArrayList<Integer> itemImageList;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,21 +58,19 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    public void orderSummary(){
+    private void orderSummary(){
 
-        itemNumberSummary = findViewById(R.id.itemNumberSummary);
-        totalPrice = findViewById(R.id.totalPrice);
+        TextView itemNumberSummary = findViewById(R.id.itemNumberSummary);
+        TextView totalPrice = findViewById(R.id.totalPrice);
         totalPrice.setText((String.format(Locale.ENGLISH, "£%.2f", MenuActivity.totalPrice)));
         itemNumberSummary.setText(Integer.toString(MenuActivity.selectedItemsList.size()));
 
     }
 
-    public void setToolbar(){
-
-        toolbar = findViewById(R.id.toolbar);
+    private void setToolbar(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ImageView bin = findViewById(R.id.binImage);
         setSupportActionBar(toolbar);
-        bin = findViewById(R.id.binImage);
-
         bin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,20 +80,20 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    public void setRecycler(){
+    private void setRecycler(){
 
-        basketRecyclerView = findViewById(R.id.recyclerViewBasket);
+        RecyclerView basketRecyclerView = findViewById(R.id.recyclerViewBasket);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
         basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
     }
 
-    public void retrieveObjectData(){
+    private void retrieveObjectData(){
 
         createArrayLists();
 
-        json = gson.toJson(MenuActivity.selectedItemsList);
+        String json = gson.toJson(MenuActivity.selectedItemsList);
         JSONArray jsonarray = null;
 
         try {
@@ -116,47 +105,45 @@ public class BasketActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < jsonarray.length(); i++) {
-            JSONObject jsonobject = null;
-            try {
+        if (jsonarray != null) {
+            for (int i = 0; i < jsonarray.length(); i++) {
+                JSONObject jsonobject = null;
+                try {
 
-                jsonobject = jsonarray.getJSONObject(i);
+                    jsonobject = jsonarray.getJSONObject(i);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                double price = 0;
+                String name = "";
+                String description = "";
+                int image = 0;
+
+                try {
+
+                    price = jsonobject.getDouble("price");
+                    name = jsonobject.getString("itemName");
+                    description = jsonobject.getString("itemDescription");
+                    image = jsonobject.getInt("itemImage");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Items item = new Items(name, description, price, image);
+                itemNamesList.add(item.getItemName());
+                itemPriceList.add(item.getPrice());
+                itemDescriptionList.add(item.getItemDescription());
+                itemImageList.add(item.getItemImage());
+
             }
-
-            double price = 0;
-            String name = "";
-            String description = "";
-            int image = 0;
-
-            try {
-
-                price = jsonobject.getDouble("price");
-                name = jsonobject.getString("itemName");
-                description = jsonobject.getString("itemDescription");
-                image = jsonobject.getInt("itemImage");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            item.itemName = name;
-            itemNamesList.add(item.itemName);
-            item.price = price;
-            itemPriceList.add(item.price);
-            item.itemDescription = description;
-            itemDescriptionList.add(item.itemDescription);
-            item.itemImage = image;
-            itemImageList.add(item.itemImage);
-            orderItems.add(item);
         }
     }
 
-    public void createArrayLists(){
+    private void createArrayLists(){
 
-        orderItems = new ArrayList<>();
         itemNamesList = new ArrayList<>();
         itemPriceList = new ArrayList<>();
         itemImageList = new ArrayList<>();
@@ -215,7 +202,10 @@ public class BasketActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    public void setBinDialog() {
+    private void setBinDialog() {
+
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder;
 
         builder = new AlertDialog.Builder(this);
         builder.setMessage("Remove all items in basket?");

@@ -19,17 +19,15 @@ import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    Items item2 = new Items();
-    List<Items> menuItem = new ArrayList<>(); // List of Items used to populate the recycler
+
+    private RecyclerView recyclerView;
+    private List<Items> menuItem = new ArrayList<>(); // List of Items used to populate the recycler
     static double totalPrice = 0.00;
     static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
 
     // MENU ITEM DETAILS IN ARRAYS :
 
-    String[] itemName = {
+    private String[] itemName = {
 
             "GBK Cheese & Bacon",
             "Classic Beef",
@@ -43,7 +41,7 @@ public class MenuActivity extends AppCompatActivity {
             "GBK American Cheese",
     };
 
-    Double[] price = {
+    private Double[] price = {
 
             10.95,
             10.65,
@@ -57,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
             13.00,
     };
 
-    String[] itemDesc = {
+    private String[] itemDesc = {
 
             "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
             "House mayo, mature Cheddar, relish, salad, chilli fried egg.",
@@ -71,7 +69,7 @@ public class MenuActivity extends AppCompatActivity {
             "Crispy bacon, BBQ sauce, house mayo, dill pickle, salad.",
     };
 
-    public int[] image = {
+    private int[] image = {
 
             R.drawable.gbkhome,
             R.drawable.login,
@@ -120,20 +118,18 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void setToolbarUI(){
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        CollapsingToolbarLayout collapsingToolbarLayout;
+        int color = 000;
         setSupportActionBar(toolbar);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setExpandedTitleColor(000);
+        collapsingToolbarLayout.setExpandedTitleColor(color);
         recyclerView = findViewById(R.id.recycler_view_id);
     }
 
     private void createMenuItemsList() {
         for (int i = 0; i < itemName.length; i++) {
-            Items item = new Items();
-            item.itemName = itemName[i];
-            item.price = price[i];
-            item.itemDescription = itemDesc[i];
-            item.itemImage = image[i];
+            Items item = new Items(itemName[i],itemDesc[i],price[i],image[i]);
             menuItem.add(item);
         }
     }
@@ -173,20 +169,19 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    public void addItemsToSelectedItemsList(int counter, String name, String description,
+    private void addItemsToSelectedItemsList(int counter, String name, String description,
                                             double price, int image){
 
+        Items item2;
+
         for (int i = 0; i < counter; i++) {
-            item2.itemName = name;
-            item2.itemDescription = description;
-            item2.price = price;
-            item2.itemImage = image;
+            item2 = new Items(name,description,price,image);
             totalPrice += item2.price;
             selectedItemsList.add(item2);
         }
     }
 
-    public void showBottomNavBar(){
+    private void showBottomNavBar(){
 
         if (selectedItemsList.size() > 0) {
             BottomNavigationView bar = findViewById(R.id.bottomNav_id);
@@ -206,13 +201,13 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    public void showPrice(){
+    private void showPrice(){
         TextView price = findViewById(R.id.priceBottomNavBar);
         price.setText(String.format(Locale.ENGLISH, "£%.2f", totalPrice));
         System.out.println(totalPrice + " THE CURRENT TOTAL PRICE");
     }
 
-    public void showItemCount(){
+    private void showItemCount(){
         TextView itemCount = findViewById(R.id.itemCountBottomNavBar);
         if (selectedItemsList.size() > 1){
             itemCount.setText(String.format("%s Items",Integer.toString(selectedItemsList.size())));

@@ -1,14 +1,8 @@
 package com.gbk.simoni.gbk;
 
 import android.app.Application;
-import android.util.Log;
-
 import com.parse.Parse;
 import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 
 // This class is the first thing that executes when the project is run.

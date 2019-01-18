@@ -15,8 +15,8 @@ import java.util.Locale;
 public class BasketAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private List<Items> items;
-    AlertDialog.Builder builder;
-    AlertDialog alertDialog;
+    private AlertDialog.Builder builder;
+    private AlertDialog alertDialog;
 
     public BasketAdapter(List<Items> items) {
 

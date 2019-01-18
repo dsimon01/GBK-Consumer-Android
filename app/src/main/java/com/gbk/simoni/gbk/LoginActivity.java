@@ -16,8 +16,8 @@ import com.parse.ParseUser;
 public class LoginActivity extends AppCompatActivity implements View.OnKeyListener,
         View.OnClickListener {
 
-    EditText username;
-    EditText password;
+    private EditText username;
+    private EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

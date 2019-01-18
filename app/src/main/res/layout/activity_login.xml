@@ -43,7 +43,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="26" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -59,7 +60,8 @@
         app:layout_constraintEnd_toEndOf="@+id/usernameEditText"
         app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="@+id/usernameEditText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="26" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

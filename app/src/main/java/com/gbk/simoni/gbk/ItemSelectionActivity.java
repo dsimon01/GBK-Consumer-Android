@@ -13,13 +13,13 @@ import android.widget.TextView;
 public class ItemSelectionActivity extends AppCompatActivity {
 
 
-    int counterValue = 1;
-    Button addToBasketButton;
-    FloatingActionButton incrementCount, decrementCount;
-    TextView itemsToAdd;
-    String itemName, itemDescription;
-    double itemPrice;
-    int itemImage;
+    private int counterValue = 1;
+    private Button addToBasketButton;
+    private FloatingActionButton incrementCount, decrementCount;
+    private TextView itemsToAdd;
+    private String itemName, itemDescription;
+    private double itemPrice;
+    private int itemImage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
         }
     }
 
-    public void incrementListener(){
+    private void incrementListener(){
         incrementCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +68,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
         });
     }
 
-    public void decrementListener(){
+    private void decrementListener(){
             decrementCount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

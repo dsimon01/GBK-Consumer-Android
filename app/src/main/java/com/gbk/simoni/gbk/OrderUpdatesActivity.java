@@ -25,11 +25,9 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
 // Activity for order updates:
 
-    RecyclerView basketRecyclerView;
-    TextView time, prep, hurray, collect;
-    Calendar now;
-    ImageView clock, food;
-    ProgressBar progressBar;
+    private TextView time, prep, hurray, collect;
+    private ImageView clock, food;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -44,7 +42,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
     }
 
-    public void defineViews(){
+    private void defineViews(){
         time = findViewById(R.id.estimatedPrepTimeTextView);
         clock = findViewById(R.id.clock);
         prep = findViewById(R.id.textViewPrep);
@@ -55,17 +53,16 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    public void displayItemsInRecyclerView(){
-        basketRecyclerView = findViewById(R.id.recyclerViewBasket);
+    private void displayItemsInRecyclerView(){
+        RecyclerView basketRecyclerView = findViewById(R.id.recyclerViewBasket);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
         basketRecyclerView.setAdapter(new OrderUpdatesAdapter(MenuActivity.selectedItemsList));
     }
 
-    public void estimatedPreparationTime(){
-
-        now = Calendar.getInstance();
+    private void estimatedPreparationTime(){
+         Calendar now = Calendar.getInstance();
 
         if (MenuActivity.selectedItemsList.size() <= 2){
             now.add(Calendar.MINUTE, 10);
@@ -83,7 +80,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
     }
 
-    public void getOrderUpdates(){
+    private void getOrderUpdates(){
 
         final Handler handler = new Handler();
         final int delay = 15000; //milliseconds
@@ -126,7 +123,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
     }
 
-    public void updateOrder(){
+    private void updateOrder(){
 
         int collectionPoint = new Random().nextInt(10) + 1; // [0,10] + 1 => [1, 10]
 
