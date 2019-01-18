@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -38,10 +39,12 @@ public class BasketAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder ViewHolder, int i) {
 
-        // When the constructor of the class is called an array list of Item type is required
-        // as parameter, this function assigns the name, description, price and image of an item
-        // in the recycler view, the function is called until there are no more items in the
-        // Array list passed as parameter.
+        /*
+        When the constructor of the class is called an array list of Item type is required
+        as parameter, this function assigns the name, description, price and image of an item
+        in the recycler view, the function is called until there are no more items in the
+        Array list passed as parameter.
+        */
         final Items basketItems = items.get(i);
         ViewHolder.basketName.setText(basketItems.itemName);
         ViewHolder.basketDesc.setText(basketItems.itemDescription);
@@ -49,10 +52,12 @@ public class BasketAdapter extends RecyclerView.Adapter<ViewHolder> {
                 "£%.2f", basketItems.price));
         ViewHolder.basketImg.setImageResource(basketItems.itemImage);
 
-        // On item click listener for an item clicked within the recycler view
-        // Generates a dialog to delete the item clicked on
-        // Removes the item from the arrayList and updates the total price displayed
-        // if the user decided to do so otherwise cancels the dialog.
+        /*
+        On item click listener for an item clicked within the recycler view
+        Generates a dialog to delete the item clicked.
+        Removes the item from the arrayList and updates the total price displayed
+        if the user decided to do so otherwise cancels the dialog.
+        */
         ViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

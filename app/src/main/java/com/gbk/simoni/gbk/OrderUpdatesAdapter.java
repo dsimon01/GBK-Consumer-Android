@@ -23,7 +23,8 @@ public class OrderUpdatesAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.basket_recycler, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.basket_recycler,
+                viewGroup, false);
         return new ViewHolder(view);
 
     }
@@ -34,7 +35,8 @@ public class OrderUpdatesAdapter extends RecyclerView.Adapter<ViewHolder> {
         final Items basketItems = items.get(i);
         ViewHolder.basketName.setText(basketItems.itemName);
         ViewHolder.basketDesc.setText(basketItems.itemDescription);
-        ViewHolder.basketPrice.setText(String.format(Locale.ENGLISH, "£%.2f", basketItems.price));
+        ViewHolder.basketPrice.setText(String.format(Locale.ENGLISH, "£%.2f",
+                basketItems.price));
         ViewHolder.basketImg.setImageResource(basketItems.itemImage);
     }
 

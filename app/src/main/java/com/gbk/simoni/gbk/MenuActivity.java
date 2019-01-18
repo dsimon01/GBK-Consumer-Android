@@ -21,9 +21,11 @@ public class MenuActivity extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
-    private List<Items> menuItem = new ArrayList<>(); // List of Items used to populate the recycler
     static double totalPrice = 0.00;
-    static List<Items> selectedItemsList = new ArrayList<>(); // list stays updated until cleared.
+    // List of Items used to populate the recycler with menu items.
+    private List<Items> menuItem = new ArrayList<>();
+    // list stays updated until cleared.
+    static List<Items> selectedItemsList = new ArrayList<>();
 
     // MENU ITEM DETAILS IN ARRAYS :
 
@@ -92,27 +94,35 @@ public class MenuActivity extends AppCompatActivity {
         // call to a method tha defines the toolbar & collapsing toolbar of the activity
         setToolbarUI();
 
-        // call to method that creates a menuItem list which is used to populate the recycler view
-        // The list contains of Item objects, and their attributes are defined from the specified
-        // arrays above -> Line 33 to 88
+        /*
+        call to method that creates a menuItem list which is used to populate the recycler view
+        The list contains of Item objects, and their attributes are defined from the specified
+        arrays above -> Line 33 to 88
+        */
         createMenuItemsList();
 
-        // call to a method that arranges the UI in the Menu Activity
-        // Sets the context of this activity with LinearLayoutManager
-        // Uses GridLayoutManger to apply a grid to the view
-        // Calls the MenuRecyclerAdapter class with the menu Items as a parameter.
+        /*
+         Call to a method that arranges the UI in the Menu Activity
+         Sets the context of this activity with LinearLayoutManager
+         Uses GridLayoutManger to apply a grid to the view
+         Calls the MenuRecyclerAdapter class with the menu Items as a parameter.
+         */
         setRecyclerView();
 
-        // call to a method that takes the data passed from the Item Selection Activity,
-        // and with an internal method call to "addItemsToSelectedItemsList" method converts
-        //the incoming data into an Item object and adds it an Items list.
+        /*
+        call to a method that takes the data passed from the Item Selection Activity,
+        and with an internal method call to "addItemsToSelectedItemsList" method converts
+        the incoming data into an Item object and adds it an Items list.
+        */
         getIntentFromItemSelectionActivity();
 
-        // call to a method that checks if the Items list has at least one item.
-        // if it does, then a bottom navigation bar is displayed to the UI which allows the user
-        // to enter the Basket Activity if they tap on it.
-        // Calls internally another 2 methods that display the total amount and total item count
-        // within the navigation bar.
+        /*
+        Call to a method that checks if the Items list has at least one item.
+        if it does, then a bottom navigation bar is displayed to the UI which allows the user
+        to enter the Basket Activity if they tap on it.
+        Calls internally another 2 methods that display the total amount and total item count
+        within the navigation bar.
+        */
         showBottomNavBar();
 
     }
@@ -155,16 +165,10 @@ public class MenuActivity extends AppCompatActivity {
             int itemImage = getIntent().getIntExtra("item_image", 2131165283);
             int counterValue = getIntent().getIntExtra("counter_value", 1);
 
-            System.out.println("MENU ACTIVITY RECEIVED FROM ITEM SELECTION ACTIVITY: " + itemName
-                    + " " + itemDescription + " " + counterValue + " Times");
-
             // call to method that takes the information from Item Selection Activity in its
             // parameters and creates a new Items object that is added to a new Items list.
             addItemsToSelectedItemsList(counterValue, itemName, itemDescription,
                     itemPrice, itemImage);
-
-            System.out.println(selectedItemsList.size() +
-                    " The size of selected items list " + selectedItemsList);
         }
 
     }

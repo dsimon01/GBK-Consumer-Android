@@ -12,20 +12,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //once the main activity is ready - redirects to Log in screen.
+        //once the main activity is ready - directs to Log in screen.
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
 
-
-        // code that keeps user logged in to the app, avoiding the login screen
-        // redirecting to Home activity.
-
-/*
-        if (ParseUser.getCurrentUser() != null){
-            Intent alreadyLoggedIn = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(alreadyLoggedIn);
-        }
-*/
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 }

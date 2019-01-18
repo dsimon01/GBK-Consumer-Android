@@ -13,16 +13,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
+
 import com.google.gson.Gson;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
@@ -32,7 +34,7 @@ public class BasketActivity extends AppCompatActivity {
 
     private ProgressDialog dialog;
     static int orderNumber;
-    private ArrayList<String> itemNamesList , itemDescriptionList;
+    private ArrayList<String> itemNamesList, itemDescriptionList;
     private ArrayList<Double> itemPriceList;
     private ArrayList<Integer> itemImageList;
     private Gson gson = new Gson();
@@ -58,7 +60,7 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    private void orderSummary(){
+    private void orderSummary() {
 
         TextView itemNumberSummary = findViewById(R.id.itemNumberSummary);
         TextView totalPrice = findViewById(R.id.totalPrice);
@@ -67,7 +69,7 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    private void setToolbar(){
+    private void setToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         ImageView bin = findViewById(R.id.binImage);
         setSupportActionBar(toolbar);
@@ -80,20 +82,37 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    private void setRecycler(){
+    private void setRecycler() {
 
         RecyclerView basketRecyclerView = findViewById(R.id.recyclerViewBasket);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
+        // calls the constructor of BasketAdapter with the user item selection list:
         basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
     }
 
-    private void retrieveObjectData(){
 
+    /*
+    The method below deals with the deserialization of an object in the users list of items.
+    The reason for that is so the attributes of the object are retrieved separately and added
+    to the database, without deserialization only the objects memory location can be referenced.
+     */
+    private void retrieveObjectData() {
+        /*
+        Calls a function to create an arrayList for each of the objects attributes
+        The lists then will be used later on to populate the database.
+        */
         createArrayLists();
 
+        /*
+        converts gson to json string, example output :
+        {"itemDescription":"House mayo, mature Cheddar, relish, salad, chilli fried egg.",
+        "itemImage":2131165302,"itemName":"Classic Beef","price":10.65}
+        */
         String json = gson.toJson(MenuActivity.selectedItemsList);
+
+        // Declaring an array of type JSONArray and using the json created above as a parameter.
         JSONArray jsonarray = null;
 
         try {
@@ -104,6 +123,11 @@ public class BasketActivity extends AppCompatActivity {
 
             e.printStackTrace();
         }
+
+        /*
+        For every element in the array created above, gets the Object which is separated from
+        other objects in Json with the use of { } (see example output above).
+        */
 
         if (jsonarray != null) {
             for (int i = 0; i < jsonarray.length(); i++) {
@@ -116,6 +140,8 @@ public class BasketActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                // Declaring default values to avoid Null exceptions.
+
                 double price = 0;
                 String name = "";
                 String description = "";
@@ -123,6 +149,10 @@ public class BasketActivity extends AppCompatActivity {
 
                 try {
 
+                    /*
+                    Based on the objects attributes retrieves them and assigns each attribute
+                    to a variable defined above.
+                    */
                     price = jsonobject.getDouble("price");
                     name = jsonobject.getString("itemName");
                     description = jsonobject.getString("itemDescription");
@@ -132,6 +162,7 @@ public class BasketActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                // Creates new item object with the attributes retrieved from the Json object
                 Items item = new Items(name, description, price, image);
                 itemNamesList.add(item.getItemName());
                 itemPriceList.add(item.getPrice());
@@ -142,7 +173,7 @@ public class BasketActivity extends AppCompatActivity {
         }
     }
 
-    private void createArrayLists(){
+    private void createArrayLists() {
 
         itemNamesList = new ArrayList<>();
         itemPriceList = new ArrayList<>();
@@ -151,12 +182,19 @@ public class BasketActivity extends AppCompatActivity {
 
     }
 
-    public void onPlaceOrderClick(View view){
+    /*
+    The below function is executed when the user has decided to place their order.
+    Shows a dialog for 2 seconds for confirmation of the action using a Handler.
+    Generates a random Order Number.
+    Populates the database with the elements of each array list with a PUT request.
+    Directs the user to a new activity.
+    */
+
+    public void onPlaceOrderClick(View view) {
 
         dialog = new ProgressDialog(BasketActivity.this);
         dialog.setTitle("Processing your order");
         dialog.setMessage("Please wait...");
-
         dialog.show();
 
         Handler handler = new Handler();
@@ -164,8 +202,8 @@ public class BasketActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                System.out.println("PLACED ORDER");
-                orderNumber = new Random().nextInt(9000) + 1000; // [0,8999] + 1000 => [1000, 9999]
+                orderNumber = new Random().nextInt(9000) + 1000;
+                // [0,8999] + 1000 => [1000, 9999]
                 ParseObject order = new ParseObject("Order");
                 order.put("TableNumber", ParseUser.getCurrentUser().getUsername());
                 order.put("OrderID", orderNumber);
@@ -177,11 +215,11 @@ public class BasketActivity extends AppCompatActivity {
                 order.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        if (e == null){
-                            Toast.makeText(BasketActivity.this, "Order is now COOKING", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), OrderUpdatesActivity.class);
+                        if (e == null) {
+                            Intent intent = new Intent(getApplicationContext(),
+                                    OrderUpdatesActivity.class);
                             startActivity(intent);
-                        }else {
+                        } else {
                             e.printStackTrace();
                         }
                     }
@@ -202,6 +240,12 @@ public class BasketActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    /*
+    Method that generates a dialog when the user taps on the bin icon in the toolbar.
+    Shows an option to cancel or delete.
+    if delete is selected, clears the array list, resets the value of the total price
+    and for the changes to update redirects the user to the menu activity.
+     */
     private void setBinDialog() {
 
         AlertDialog alertDialog;

@@ -20,10 +20,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Method avoids user to press Back button.
     @Override
     public void onBackPressed() {
         // super.onBackPressed(); commented this line in order to disable back press
-        Toast.makeText(getApplicationContext(), "Back press disabled!",
-                Toast.LENGTH_SHORT).show();
     }
 }

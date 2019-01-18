@@ -59,14 +59,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
             Toast.makeText(this, "Username/Password required",
                     Toast.LENGTH_SHORT).show();
         } else {
-            //validates the user input with the credentials stored in the server
-            // and attempts to login.
-            //upon successful login, redirects the user to the Home activity
+
+            //validates the user input with the credentials stored in the database.
             ParseUser.logInInBackground(username.getText().toString(),
                     password.getText().toString(), new LogInCallback() {
                 @Override
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
+                        //upon successful login, directs the user to the Home activity
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     } else {
@@ -79,11 +79,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
         }
     }
 
+    // Disable back button.
     @Override
     public void onBackPressed() {
         // super.onBackPressed(); commented this line in order to disable back press
-        Toast.makeText(getApplicationContext(), "Back press disabled!",
-                Toast.LENGTH_SHORT).show();
     }
 }
 

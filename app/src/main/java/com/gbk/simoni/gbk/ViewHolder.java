@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    // In order to use a recycler view a ViewHolder class has to be implemented.
-    // In this project there are 3 recycler views so I am using the same view holder for both cases.
+    /*
+     In order to use a recycler view a ViewHolder class has to be implemented.
+     In this project there are 3 recycler views using the same view holder for all cases.
+    */
 
     // MENU ACTIVITY:
     ImageView image;
@@ -30,7 +32,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.name_textView);
         price = itemView.findViewById(R.id.price_textV);
         desc = itemView.findViewById(R.id.desc_textV);
-        //BASKET:
+        //BASKET + ORDER UPDATES:
         basketImg = itemView.findViewById(R.id.basket_image_view_recycler);
         basketName = itemView.findViewById(R.id.itemNameBasketView);
         basketPrice = itemView.findViewById(R.id.itemPriceBasket);

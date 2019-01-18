@@ -13,7 +13,7 @@ public class ParseServerConfig extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Enable Local Datastore.
+        // Enables Local Data store.
         Parse.enableLocalDatastore(this);
 
         // Config keys with Parse Server.

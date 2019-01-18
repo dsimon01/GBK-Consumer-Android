@@ -35,9 +35,20 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_updates);
 
+        // Defines the Activity's views by locating them in the Resources file.
         defineViews();
+
+        // Arranges the items selected into a recycler view by calling the Adapter constructor.
         displayItemsInRecyclerView();
+
+        // Estimates preparation time based on the order size.
         estimatedPreparationTime();
+
+        /*
+         GET request using a Handler to database that runs every 15'' looking for order updates.
+         Calls internally a method to update the Activity View if the order is Ready.
+         Deletes the order from the Database and redirects the user to Home activity.
+        */
         getOrderUpdates();
 
     }
@@ -100,14 +111,14 @@ public class OrderUpdatesActivity extends AppCompatActivity {
 
                                 if (object.getString("Status").equals("ready")) {
                                     System.out.println("ORDER IS READY");
-                                    // call method to update text views and return to home screen after 5 minutes - collect from till number
+                                    // call method to update text views
                                     updateOrder();
-                                    object.deleteInBackground(); // delete from DB once ready
+                                    // delete from DB once ready
+                                    object.deleteInBackground();
                                     handler.removeCallbacksAndMessages(null);
                                 }else {
-                                    System.out.println("The status of the order is: " + object.getString("Status"));
-                                    System.out.println("ORDER NOT READY");
-                                    System.out.println("Order number " + BasketActivity.orderNumber);
+                                    System.out.println("The status of the order is: "
+                                            + object.getString("Status"));
                                 }
                             }
                         } else {
@@ -150,9 +161,9 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         }, 10000);
     }
 
+    // Method that blocks back press.
     @Override
     public void onBackPressed() {
         // super.onBackPressed(); commented this line in order to disable back press
-        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
     }
 }

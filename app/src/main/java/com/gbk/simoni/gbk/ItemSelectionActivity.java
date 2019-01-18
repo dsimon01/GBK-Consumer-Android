@@ -29,15 +29,16 @@ public class ItemSelectionActivity extends AppCompatActivity {
         decrementCount = findViewById(R.id.removeFloatingActionButton);
         itemsToAdd = findViewById(R.id.numberOfItems);
 
-        // Method call to retrieve data passed from the MenuRecyclerAdapter and then calls internally
-        // another method which populates the activity resources with the data retrieved.
+        /*
+        Method call to retrieve data passed from the MenuRecyclerAdapter and then calls internally
+        another method which populates the activity resources with the data retrieved.
+        */
         getIntentFromRecyclerAdapter();
 
         // OnClickListener on when the user is incrementing the items to add in their basket.
         incrementListener();
 
         //OnClickListener on when the user is decrementing the items for their basket
-        //the code below updates the text shown in the addToBasketButton to add items to basket.
         decrementListener();
     }
 
@@ -51,7 +52,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
             itemDescription = getIntent().getStringExtra("item_description");
             itemPrice = getIntent().getDoubleExtra("item_price", 0.00);
             itemImage = getIntent().getIntExtra("item_image", 2131165283);
-
+            // Calls method to set content based on the above variable values
             setActivityContent(itemName, itemDescription, itemImage);
         }
     }
@@ -85,6 +86,8 @@ public class ItemSelectionActivity extends AppCompatActivity {
             });
         }
 
+
+    //Method that expects values to set the content of the activity.
     private void setActivityContent(String itemName, String itemDescription, int image) {
 
         TextView name = findViewById(R.id.itemNameTextView);
@@ -95,9 +98,11 @@ public class ItemSelectionActivity extends AppCompatActivity {
         images.setImageResource(image);
     }
 
-    // When the user is clicking on to add their items to the basket, the following code
-    // is executed. All item data is passed to the Menu activity where it is converted into an Item
-    // object and added to the user's selected items.
+    /*
+    When the user is clicking on to add their items to the basket, the following code
+    is executed. All item data is passed to the Menu activity where it is converted into an Item
+    object and added to the user's selected items.
+    */
     public void addToBasket(View view) {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("item_name", itemName);
@@ -105,7 +110,6 @@ public class ItemSelectionActivity extends AppCompatActivity {
         intent.putExtra("item_image", itemImage);
         intent.putExtra("item_price", itemPrice);
         intent.putExtra("counter_value", counterValue);
-        System.out.println("BASKET SENDING " + counterValue + " ITEMS TO THE MENU ACTIVITY");
         startActivity(intent);
     }
 

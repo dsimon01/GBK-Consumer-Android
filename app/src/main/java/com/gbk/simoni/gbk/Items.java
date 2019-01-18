@@ -1,7 +1,7 @@
 package com.gbk.simoni.gbk;
 
 
-// Object Items and its attributes.
+// Object Items, its attributes and getters.
 
 public class Items {
 

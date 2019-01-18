@@ -32,10 +32,12 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         return new ViewHolder(view);
     }
 
-    // Creates a new Item, from the Items passed as parameters to the constructor.
-    // Sets its attributes by finding the Resource ID in the ViewHolder Class.
-    // Sets on Click listener to the view which redirects to the Item Selection Activity.
-    // The data from the selected item is passed to the Selection activity with an intent.
+    /*
+     Creates a new Item, from the Items passed as parameters to the constructor.
+     Sets its attributes by finding the Resource ID in the ViewHolder Class.
+     Sets on Click listener to the view which redirects to the Item Selection Activity.
+     The data from the selected item is passed to the Selection activity with an intent.
+    */
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
