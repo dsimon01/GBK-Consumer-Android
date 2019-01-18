@@ -16,7 +16,7 @@
         android:layout_margin="10dp"
         android:scaleType="centerCrop"
         android:id="@+id/basket_image_view_recycler"
-        />
+        android:contentDescription="@string/desc" />
 
     <LinearLayout
         android:layout_width="match_parent"

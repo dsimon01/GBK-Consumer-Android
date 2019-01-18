@@ -13,6 +13,34 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="My Basket" />
 
+    <ImageView
+        android:id="@+id/binImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/toolbarBasket"
+        android:layout_alignRight="@+id/toolbarBasket"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:contentDescription="@string/desc"
+        app:srcCompat="@drawable/bin_icon"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="113dp"
+        android:layout_height="99dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:contentDescription="@string/desc"
+        app:srcCompat="@drawable/gbklogo" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewBasket"
@@ -92,7 +120,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/totalItemCount4"
+        android:id="@+id/taxOnOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -105,20 +133,20 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/totalPrice3"
+        android:id="@+id/taxOnOrderValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="171dp"
         android:layout_marginLeft="171dp"
         android:layout_marginTop="345dp"
-        android:layout_toEndOf="@+id/totalItemCount4"
-        android:layout_toRightOf="@+id/totalItemCount4"
+        android:layout_toEndOf="@+id/taxOnOrder"
+        android:layout_toRightOf="@+id/taxOnOrder"
         android:text="@string/_20"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/totalItemCount5"
+        android:id="@+id/serviceCharge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -131,34 +159,20 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/totalPrice4"
+        android:id="@+id/serviceChargeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="159dp"
         android:layout_marginLeft="159dp"
         android:layout_marginTop="385dp"
-        android:layout_toEndOf="@+id/totalItemCount5"
-        android:layout_toRightOf="@+id/totalItemCount5"
+        android:layout_toEndOf="@+id/serviceCharge"
+        android:layout_toRightOf="@+id/serviceCharge"
         android:text="@string/free"
         android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/binImage"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignEnd="@+id/toolbarBasket"
-        android:layout_alignRight="@+id/toolbarBasket"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        app:srcCompat="@drawable/bin_icon" />
-
     <TextView
-        android:id="@+id/totalItemCount2"
+        android:id="@+id/totalItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -178,8 +192,8 @@
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
         android:layout_marginTop="429dp"
-        android:layout_toEndOf="@+id/totalItemCount2"
-        android:layout_toRightOf="@+id/totalItemCount2"
+        android:layout_toEndOf="@+id/totalItemPrice"
+        android:layout_toRightOf="@+id/totalItemPrice"
         android:text="@string/_30_95"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp" />
@@ -199,17 +213,6 @@
         android:text="@string/place_order"
         android:textColor="@color/colorPrimary" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="113dp"
-        android:layout_height="99dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
-        app:srcCompat="@drawable/gbklogo" />
 
 </RelativeLayout>
 
