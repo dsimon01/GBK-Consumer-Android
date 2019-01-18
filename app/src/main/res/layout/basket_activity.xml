@@ -33,7 +33,7 @@
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
         android:padding="5dp"
-        android:text="Gourmet Burger Kitchen"
+        android:text="@string/gourmet_burger_kitchen"
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -48,7 +48,7 @@
         android:layout_marginTop="147dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
-        android:text="London"
+        android:text="@string/london"
         android:textAllCaps="true"
         android:textSize="18sp" />
 
@@ -61,8 +61,9 @@
         android:layout_marginLeft="43dp"
         android:layout_marginTop="234dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
-        android:text="Order Summary:"
-        android:textSize="24sp" />
+        android:text="@string/order_summary"
+        android:textSize="24sp"
+        android:layout_toRightOf="@+id/recyclerViewBasket" />
 
     <TextView
         android:id="@+id/numberOfItems"
@@ -74,7 +75,7 @@
         android:layout_marginTop="300dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
-        android:text="Number of items"
+        android:text="@string/number_of_items"
         android:textSize="18sp" />
 
     <TextView
@@ -87,7 +88,7 @@
         android:layout_marginTop="302dp"
         android:layout_toEndOf="@+id/numberOfItems"
         android:layout_toRightOf="@+id/numberOfItems"
-        android:text="10"
+        android:text="@string/_10"
         android:textSize="18sp" />
 
     <TextView
@@ -100,7 +101,7 @@
         android:layout_marginTop="345dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
-        android:text="Tax on order "
+        android:text="@string/tax_on_order"
         android:textSize="18sp" />
 
     <TextView
@@ -113,7 +114,7 @@
         android:layout_marginTop="345dp"
         android:layout_toEndOf="@+id/totalItemCount4"
         android:layout_toRightOf="@+id/totalItemCount4"
-        android:text="20%"
+        android:text="@string/_20"
         android:textSize="18sp" />
 
     <TextView
@@ -126,7 +127,7 @@
         android:layout_marginTop="385dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
-        android:text="Service charge"
+        android:text="@string/service_charge"
         android:textSize="18sp" />
 
     <TextView
@@ -139,7 +140,7 @@
         android:layout_marginTop="385dp"
         android:layout_toEndOf="@+id/totalItemCount5"
         android:layout_toRightOf="@+id/totalItemCount5"
-        android:text="FREE"
+        android:text="@string/free"
         android:textSize="18sp" />
 
     <ImageView
@@ -166,7 +167,7 @@
         android:layout_marginTop="430dp"
         android:layout_toEndOf="@+id/recyclerViewBasket"
         android:layout_toRightOf="@+id/recyclerViewBasket"
-        android:text="TOTAL"
+        android:text="@string/total"
         android:textSize="18sp" />
 
     <TextView
@@ -179,7 +180,7 @@
         android:layout_marginTop="429dp"
         android:layout_toEndOf="@+id/totalItemCount2"
         android:layout_toRightOf="@+id/totalItemCount2"
-        android:text="£30.95"
+        android:text="@string/_30_95"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp" />
 
@@ -195,7 +196,7 @@
         android:layout_toRightOf="@+id/recyclerViewBasket"
         android:background="@color/colorAccent"
         android:onClick="onPlaceOrderClick"
-        android:text="Place order "
+        android:text="@string/place_order"
         android:textColor="@color/colorPrimary" />
 
     <ImageView

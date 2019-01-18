@@ -29,7 +29,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
         decrementCount = findViewById(R.id.removeFloatingActionButton);
         itemsToAdd = findViewById(R.id.numberOfItems);
 
-        // Method call to retrieve data passed from the RecyclerAdapter and then calls internally
+        // Method call to retrieve data passed from the MenuRecyclerAdapter and then calls internally
         // another method which populates the activity resources with the data retrieved.
         getIntentFromRecyclerAdapter();
 

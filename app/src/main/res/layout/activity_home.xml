@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.508"
-        app:srcCompat="@drawable/home_activity" />
+        app:srcCompat="@drawable/home_activity"
+        android:contentDescription="@string/desc" />
 
     <Button
         android:id="@+id/MenuButton"
@@ -25,7 +26,7 @@
         android:layout_height="37dp"
         android:background="@color/colorAccent"
         android:onClick="onViewMenuClick"
-        android:text="View our Menu"
+        android:text="@string/view_our_menu"
         android:textColor="@color/colorFab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

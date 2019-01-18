@@ -102,7 +102,7 @@ public class MenuActivity extends AppCompatActivity {
         // call to a method that arranges the UI in the Menu Activity
         // Sets the context of this activity with LinearLayoutManager
         // Uses GridLayoutManger to apply a grid to the view
-        // Calls the RecyclerAdapter class with the menu Items as a parameter.
+        // Calls the MenuRecyclerAdapter class with the menu Items as a parameter.
         setRecyclerView();
 
         // call to a method that takes the data passed from the Item Selection Activity,
@@ -143,7 +143,7 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        recyclerView.setAdapter(new RecyclerAdapter(menuItem));
+        recyclerView.setAdapter(new MenuRecyclerAdapter(menuItem));
     }
 
     private void getIntentFromItemSelectionActivity(){

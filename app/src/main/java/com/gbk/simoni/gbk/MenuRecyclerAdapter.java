@@ -17,12 +17,12 @@ import java.util.Locale;
 
  // This class is called with an Items List parameter from the Menu Activity > setRecyclerView().
 
-public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class MenuRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private List<Items> items;
 
     // Constructor
-    public RecyclerAdapter(List<Items> items) {
+    public MenuRecyclerAdapter(List<Items> items) {
         this.items = items;
     }
 
@@ -30,7 +30,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     // Uses the custom made "Card View" Layout.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_recycler, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_recycler,
+                viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -46,14 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.name.setText(menuItem.itemName);
         viewHolder.price.setText(String.format(Locale.ENGLISH, "£%.2f", menuItem.price));
         viewHolder.desc.setText(menuItem.itemDescription);
-      //  viewHolder.image.setImageResource(menuItem.itemImage);
-
         Glide.with(viewHolder.itemView).load(menuItem.itemImage).into(viewHolder.image);
-
-         //System.out.println(menuItem);   = >  com.gbk.simoni.gbk.Items@ee5429c
-        // System.out.println(menuItem.itemName);  = > Gourmet Very Spicy
-        // System.out.println(menuItem.itemDescriptionList); Description1
-        // System.out.println(menuItem.itemImageList); => 2131165283
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

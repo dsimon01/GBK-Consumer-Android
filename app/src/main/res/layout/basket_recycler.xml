@@ -27,7 +27,7 @@
             android:id="@+id/itemNameBasketView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Burger Name"
+            android:text="@string/burger_name"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Burger Desc"
+            android:text="@string/burger_desc"
             android:layout_marginTop="2dp"
             android:textSize="14sp" />
 
@@ -46,8 +46,8 @@
             android:id="@+id/itemPriceBasket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PRICE"
-            android:gravity="right"
+            android:text="@string/price"
+            android:gravity="end"
             android:layout_marginRight="20dp"/>
 
     </LinearLayout>

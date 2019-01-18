@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".ItemSelectionActivity">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -23,7 +23,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login" />
+        app:srcCompat="@drawable/login"
+        android:contentDescription="@string/desc" />
 
     <TextView
         android:id="@+id/itemNameTextView"
@@ -31,7 +32,7 @@
         android:layout_height="55dp"
         android:background="@android:color/holo_orange_light"
         android:padding="10dp"
-        android:text="The Item Name"
+        android:text="@string/the_item_name"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
@@ -52,7 +53,7 @@
         android:layout_marginRight="8dp"
         android:gravity="center"
         android:padding="5dp"
-        android:text="The item description"
+        android:text="@string/the_item_description"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:rippleColor="@color/colorAccent"
-        app:srcCompat="@drawable/plus" />
+        app:srcCompat="@drawable/plus"
+        android:focusable="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/removeFloatingActionButton"
@@ -90,7 +92,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/colorAccent"
-        app:srcCompat="@drawable/minus" />
+        app:srcCompat="@drawable/minus"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/numberOfItems"
@@ -115,7 +118,7 @@
         android:layout_height="55dp"
         android:background="@color/colorAccent"
         android:onClick="addToBasket"
-        android:text="ADD ITEM TO BASKET"
+        android:text="@string/add_item_to_basket"
         android:textColor="@color/colorFab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline" />
@@ -128,7 +131,7 @@
         android:layout_marginRight="28dp"
         android:layout_marginBottom="108dp"
         android:padding="8dp"
-        android:text="If you have any food allergies, intolerances or dietary requirements, please do come and talk to us directly before placing your order. We can answer any questions you have about the ingredients and cooking methods we use. To find out more about this restaurant’s food safety, visit the Food Standards Agency."
+        android:text="@string/if_you_have_any_food_allergies_intolerances_or_dietary_requirements_please_do_come_and_talk_to_us_directly_before_placing_your_order_we_can_answer_any_questions_you_have_about_the_ingredients_and_cooking_methods_we_use_to_find_out_more_about_this_restaurant_s_food_safety_visit_the_food_standards_agency"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/addToBasketButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline" />
@@ -140,7 +143,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:padding="10dp"
-        android:text="Allergy information"
+        android:text="@string/allergy_information"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/allergyInformationText_id"
         app:layout_constraintStart_toStartOf="parent" />
