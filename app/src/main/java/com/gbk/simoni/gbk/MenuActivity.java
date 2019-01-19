@@ -26,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
     private List<Items> menuItem = new ArrayList<>();
     // list stays updated until cleared.
     static List<Items> selectedItemsList = new ArrayList<>();
+    static ArrayList<Items> populateBasketRecycler = new ArrayList<>();
 
     // MENU ITEM DETAILS IN ARRAYS :
 
@@ -124,7 +125,6 @@ public class MenuActivity extends AppCompatActivity {
         within the navigation bar.
         */
         showBottomNavBar();
-
     }
 
     private void setToolbarUI(){
@@ -177,12 +177,16 @@ public class MenuActivity extends AppCompatActivity {
                                             double price, int image){
 
         Items item2;
-
         for (int i = 0; i < counter; i++) {
             item2 = new Items(name,description,price,image);
             totalPrice += item2.price;
             selectedItemsList.add(item2);
         }
+
+        Items item3;
+        String name_with_counter = "x" + counter + " " + name;
+        item3 = new Items(name_with_counter,description,price,image);
+        populateBasketRecycler.add(item3);
     }
 
     private void showBottomNavBar(){
