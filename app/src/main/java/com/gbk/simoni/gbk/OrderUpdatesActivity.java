@@ -50,7 +50,6 @@ public class OrderUpdatesActivity extends AppCompatActivity {
          Deletes the order from the Database and redirects the user to Home activity.
         */
         getOrderUpdates();
-
     }
 
     private void defineViews(){
@@ -69,7 +68,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
-        basketRecyclerView.setAdapter(new OrderUpdatesAdapter(MenuActivity.selectedItemsList));
+        basketRecyclerView.setAdapter(new OrderUpdatesAdapter(MenuActivity.populateBasketRecycler));
     }
 
     private void estimatedPreparationTime(){
@@ -88,7 +87,6 @@ public class OrderUpdatesActivity extends AppCompatActivity {
         time.setText(timeFormat.format(now.getTime()));
 
         System.out.println("Estimated time is: " + timeFormat.format(now.getTime()));
-
     }
 
     private void getOrderUpdates(){
@@ -131,7 +129,6 @@ public class OrderUpdatesActivity extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
-
     }
 
     private void updateOrder(){

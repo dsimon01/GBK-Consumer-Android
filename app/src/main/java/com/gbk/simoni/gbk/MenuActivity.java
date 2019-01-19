@@ -125,7 +125,6 @@ public class MenuActivity extends AppCompatActivity {
         within the navigation bar.
         */
         showBottomNavBar();
-
     }
 
     private void setToolbarUI(){
@@ -178,8 +177,6 @@ public class MenuActivity extends AppCompatActivity {
                                             double price, int image){
 
         Items item2;
-
-
         for (int i = 0; i < counter; i++) {
             item2 = new Items(name,description,price,image);
             totalPrice += item2.price;
@@ -187,11 +184,8 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         Items item3;
-        String namez = "x" + counter + " " + name;
-        item3 = new Items(namez,description,price,image);
-        for (int i = 0; i < counter; i++) {
-            totalPrice += item3.price;
-        }
+        String name_with_counter = "x" + counter + " " + name;
+        item3 = new Items(name_with_counter,description,price,image);
         populateBasketRecycler.add(item3);
     }
 
