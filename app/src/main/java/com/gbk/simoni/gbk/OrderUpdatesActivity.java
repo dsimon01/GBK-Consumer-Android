@@ -154,6 +154,7 @@ public class OrderUpdatesActivity extends AppCompatActivity {
             public void run() {
                 System.out.println("Redirect to home screen schedule");
                 MenuActivity.selectedItemsList.clear();
+                MenuActivity.populateBasketRecycler.clear();
                 MenuActivity.totalPrice = 0.00;
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);

@@ -89,7 +89,7 @@ public class BasketActivity extends AppCompatActivity {
         basketRecyclerView.setLayoutManager(linearLayoutManager);
         basketRecyclerView.setHasFixedSize(true);
         // calls the constructor of BasketAdapter with the user item selection list:
-        basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.selectedItemsList));
+        basketRecyclerView.setAdapter(new BasketAdapter(MenuActivity.populateBasketRecycler));
     }
 
 
@@ -110,7 +110,7 @@ public class BasketActivity extends AppCompatActivity {
         {"itemDescription":"House mayo, mature Cheddar, relish, salad, chilli fried egg.",
         "itemImage":2131165302,"itemName":"Classic Beef","price":10.65}
         */
-        String json = gson.toJson(MenuActivity.selectedItemsList);
+        String json = gson.toJson(MenuActivity.populateBasketRecycler);
 
         // Declaring an array of type JSONArray and using the json created above as a parameter.
         JSONArray jsonarray = null;
@@ -260,6 +260,7 @@ public class BasketActivity extends AppCompatActivity {
                 System.out.println("clicked on remove!");
                 MenuActivity.totalPrice = 0.00;
                 MenuActivity.selectedItemsList.clear();
+                MenuActivity.populateBasketRecycler.clear();
                 Intent intent = new Intent(BasketActivity.this, MenuActivity.class);
                 startActivity(intent);
 

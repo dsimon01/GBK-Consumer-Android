@@ -69,9 +69,16 @@ public class BasketAdapter extends RecyclerView.Adapter<ViewHolder> {
                     public void onClick(DialogInterface dialog, int which) {
 
                         System.out.println("clicked on remove! " + which);
+
+                        // display the item with -1 on the counter.
+
                         MenuActivity.totalPrice = MenuActivity.totalPrice -
                                 MenuActivity.selectedItemsList.get(which + 1).price;
+
                         MenuActivity.selectedItemsList.remove(which + 1);
+
+
+
                         Intent intent = new Intent(v.getContext(), MenuActivity.class);
                         v.getContext().startActivity(intent);
                     }
