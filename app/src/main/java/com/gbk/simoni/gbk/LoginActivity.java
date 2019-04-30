@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnKeyListen
         }
     }
 
-    //When the user selects the login addToBasketButton:
+    //When the user selects the login button:
     public void onLoginClick(View view) {
 
         //error handling for empty input.
